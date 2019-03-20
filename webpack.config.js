@@ -1,5 +1,8 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+//参考https://vue-loader.vuejs.org/zh/guide/
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
+
 module.exports = {
     mode: 'development',
 
@@ -24,6 +27,10 @@ module.exports = {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 use: ['babel-loader'],
+            },
+            {
+                test: /\.vue$/,
+                use: ['vue-loader']
             }
         ],
        
@@ -35,6 +42,7 @@ module.exports = {
             title: 'blog',
             filename: 'index.html',
             template: './template.html'
-        })
+        }),
+        new VueLoaderPlugin()
     ]
 }
