@@ -19,9 +19,17 @@ module.exports = {
             {
                 test: /\.(css|less)$/,
                 use: ['style-loader','css-loader','less-loader']
+            },
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: ['babel-loader'],
             }
-        ]
+        ],
+       
     },
+     // 输出 source-map 方便直接调试 ES6 源码
+    devtool: 'source-map',
     plugins: [
         new HtmlWebpackPlugin({
             title: 'blog',
