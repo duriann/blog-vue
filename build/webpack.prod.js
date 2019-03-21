@@ -2,8 +2,9 @@ const path = require('path')
 const base = require('./webpack.base.js')
 const merge = require('webpack-merge')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 
-module.exports = merge(base,{
+let result =  merge(base,{
     mode: 'production',
 
     output: {
@@ -13,6 +14,11 @@ module.exports = merge(base,{
     plugins: [
         new CleanWebpackPlugin({
             cleanOnceBeforeBuildPatterns: ['**/*', '!index.html']//默认是根据output中的path为基目录
+        }),
+        new MiniCssExtractPlugin({
+            filename: "css/[name].[contenthash].css"
         })
     ]
 })
+console.log(process.env.NODE_ENV,result)
+module.exports = result

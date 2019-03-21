@@ -12,7 +12,8 @@ module.exports = merge(base, {
         // contentBase: path.join(__dirname,'dist'),加了HtmlWebpackPlugin后好像这个并没有什么卵用了
         port: 9999,
         host: '0.0.0.0',
-        hot: true
+        hot: true,
+        open: true
         // index: 'index.html'
     },
      // 输出 source-map 方便直接调试 ES6 源码
