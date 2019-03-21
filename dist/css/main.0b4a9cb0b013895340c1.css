@@ -1,0 +1,18 @@
+.title {
+  background-color: yellowgreen;
+}
+.test {
+  height: 100px;
+  width: 100px;
+  background: url(imgs/test.png) no-repeat;
+  background-size: cover;
+}
+
+h1 {
+  background-color: pink;
+}
+
+h1 {
+  font-size: 20px;
+}
+

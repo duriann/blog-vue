@@ -1,6 +1,7 @@
 <template>
     <div id='app'>
-        <h1>hello vue</h1>
+        <h1 class="hello">hello vue</h1>
+        <router-link to="/header">header</router-link>
         <router-view></router-view>
     </div>
 </template>
@@ -10,5 +11,7 @@ export default {
 }
 </script>
 <style lang="less">
-    
+    .hello{
+        background-color: pink;
+    }
 </style>
