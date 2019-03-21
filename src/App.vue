@@ -1,6 +1,6 @@
 <template>
     <div>
-        hello vue,
+        hello vue,testa
         <h3>hello pineapplea</h3>
         <span>{{count}}</span>
         <router-view></router-view>
