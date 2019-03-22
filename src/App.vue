@@ -1,17 +1,19 @@
 <template>
     <div id='app'>
-        <h1 class="hello">hello vue</h1>
-        <router-link to="/header">header</router-link>
-        <router-view></router-view>
+        <Header></Header>
+        <Nav></Nav>
     </div>
 </template>
 <script>
+import Header from './component/Header/Header.vue'
+import Nav from './component/Nav/Nav.vue'
 export default {
-
+    components: {
+        Header,
+        Nav
+    }
 }
 </script>
 <style lang="less">
-    .hello{
-        background-color: pink;
-    }
+    
 </style>
