@@ -1,5 +1,5 @@
 <template>
-    <div class="card">
+    <div class="article">
         <div class="title">
             <span class="category"><i></i>APP</span>
             <span class="title-info">莴笋种植技术：教你该如何种植出又大又好的莴笋</span>
@@ -27,7 +27,7 @@ export default {
 }
 </script>
 <style lang="less">
-    .card{
+    .article{
         padding: 20px;
         background-color: #fff;
         .title{

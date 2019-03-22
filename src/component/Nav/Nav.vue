@@ -38,11 +38,14 @@ export default {
 }
 </script>
 <style lang="less">
-    
+    .nav{
+        background-color: #4a4a4a;
+    }
     .nav ul{
         display: flex;
-        background-color: #4a4a4a;
         opacity: .9;
+        max-width: 1226px;
+        margin: 0 auto;
     }
     .nav li{
         height: 52px;

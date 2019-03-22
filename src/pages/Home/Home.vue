@@ -1,6 +1,6 @@
 <template>
     <div class="home">
-        <div>
+        <div class="left">
             <Card type='Article'></Card>
             <Card type='Article'></Card>
             <Card type='Article'></Card>
@@ -28,6 +28,11 @@ export default {
 <style lang="less">
     .home{
         display: flex;
+        .left{
+          .article{
+              margin-bottom: 10px;
+          }  
+        }
         .right{
             margin-left: 10px;
             .social{
