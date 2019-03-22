@@ -18,7 +18,7 @@ export default {
                 {id: 4, name: '生物技术',url: '/news',isActive: false},
                 {id: 5, name: '编程技术',url: '/news',isActive: false},
                 {id: 6, name: '安全运维',url: '/news',isActive: false},
-                {id: 7, name: '关于',url: '/news',},
+                {id: 7, name: '关于',url: '/about',},
             ]
         }
     },

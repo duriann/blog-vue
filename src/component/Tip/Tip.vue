@@ -9,7 +9,7 @@ export default {
     
 }
 </script>
-<style >
+<style lang='less'>
     .tip{
         height: 40px;
         color: #666;
@@ -19,13 +19,19 @@ export default {
         display: flex;
         justify-content: space-between;
     }
+    .info{
+        i{
+            color: #56af45;
+        }
+    }
     .login{
         color: #00a67c;
         cursor: pointer;
+         i{
+            color: gray;
+            font-size: 20px;
+            vertical-align: middle;
+        }
     }
-    i{
-       color: gray;
-       font-size: 20px;
-       vertical-align: middle;
-    }
+   
 </style>
