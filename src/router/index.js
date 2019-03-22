@@ -1,16 +1,22 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import Header from '../component/Header/Header.vue'
+import Home from '../pages/Home/Home'
+import News from '../pages/News/News'
 
 Vue.use(Router)
 
 export default new Router({
     routes: [
         {
-            path: '/header',
-            name: 'header',
-            component: Header
+            path: '/',
+            name: 'home',
+            component: Home
+        },
+        {
+            path: '/news',
+            name: 'news',
+            component: News
         }
     ]
 })
