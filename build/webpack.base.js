@@ -4,6 +4,12 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 
 module.exports = {
     entry: ('./src/main.js'),
+    resolve: {
+        extensions: ['.js','.vue','.json'],
+        alias: {
+            '@': resolve('src')
+        }
+    },
     module: {
         rules: [
             {
@@ -28,10 +34,18 @@ module.exports = {
 					options: {
 						//如果图片超过下面这个数据所标注的大小，那么图片将不会被转换成base64的格式，直接会将图片文件扔到dist目录里
                         limit: 1024 * 50,
-                        name: "imgs/[name].[ext]",
+                        name: "imgs/[name].[hash:7].[ext]",
 					}
 				}]
-			},
+            },
+            {
+                test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+                loader: 'url-loader',
+                options: {
+                  limit: 10000,
+                  name: 'fonts/[name].[hash:7].[ext]'
+                }
+            }
         ],
        
     },
