@@ -9,7 +9,7 @@ export default {
     
 }
 </script>
-<style lang="less" scope>
+<style lang="less">
     .header{
         height: 104px;
         background-color: #00a67c;
@@ -17,11 +17,12 @@ export default {
         display: flex;
         align-items: center;
         justify-content: center;
+         .title{
+            font-size: 40px;
+        }
+        .ins{
+            font-size: 24px;
+        }
     }
-    .title{
-        font-size: 40px;
-    }
-    .ins{
-        font-size: 24px;
-    }
+   
 </style>

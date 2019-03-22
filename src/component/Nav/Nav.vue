@@ -38,11 +38,7 @@ export default {
 }
 </script>
 <style lang="less">
-    a{
-        text-decoration: none;
-        color: #fff;
-        display: block;
-    }
+    
     .nav ul{
         display: flex;
         background-color: #4a4a4a;
@@ -60,5 +56,9 @@ export default {
     }
     .nav li.current{
         background-color: #16a085;
+    }
+    .nav a{
+        line-height: 52px;
+        text-align: center;
     }
 </style>

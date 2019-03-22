@@ -2,8 +2,8 @@
     <div id='app'>
         <Header></Header>
         <Nav></Nav>
-        <Tip></Tip>
         <div class="content">
+            <Tip class="tip"></Tip>
             <router-view></router-view>
         </div>
     </div>
@@ -21,5 +21,12 @@ export default {
 }
 </script>
 <style lang="less">
-    
+    .content{
+        max-width: 1226px;
+        margin: 0 auto;
+        margin-bottom: 10px;
+        .tip{
+            margin-bottom: 10px;
+        }
+    }
 </style>
