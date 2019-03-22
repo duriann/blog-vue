@@ -1,4 +1,4 @@
-<template>
+﻿<template>
     <div class="nav">
         <ul>
             <li v-for="item in lis" :key="item.id" :class="{current: item.isActive}">
@@ -18,7 +18,7 @@ export default {
                 {id: 4, name: '生物技术'},
                 {id: 5, name: '编程技术'},
                 {id: 6, name: '安全运维'},
-                {id: 7, name: '关于'},
+                {id: 7, name: '关于我也测试'},
             ]
         }
     }
