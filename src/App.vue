@@ -10,8 +10,8 @@
   </div>
 </template>
 <script>
-import Header from './component/Header/Header.vue'
-import Nav from './component/Nav/Nav.vue'
+import Header from './component/Header/Header'
+import Nav from './component/Nav/Nav'
 import Tip from './component/Tip/Tip'
 import ToTop from './component/ToTop/ToTop'
 export default {
@@ -23,7 +23,7 @@ export default {
   }
 }
 </script>
-<style lang="less">
+<style lang="less" scoped>
 .content {
   max-width: 1226px;
   margin: 0 auto;

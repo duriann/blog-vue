@@ -1,46 +1,14 @@
 <template>
-    <div class="home">
-        <div class="left">
-            <Card type='Article'></Card>
-            <Card type='Article'></Card>
-            <Card type='Article'></Card>
-            <Card type='Article'></Card>
-       
-        </div>
-        <div class="right">
-            <Social></Social>
-            <Card type='Category'></Card>
-            <Card type='Category'></Card>
-            <Card type='Category'></Card>
-        </div>
-    </div>
+  <Common></Common>
 </template>
 <script>
-import Card from  '@/component/Card/Card'
-import Social from '@/component/Social/Social'
+import Common from '../Common/Common'
+
 export default {
-    components: {
-        Card,
-        Social
-    }
+  components: {
+    Common,
+  }
 }
 </script>
-<style lang="less">
-    .home{
-        display: flex;
-        .left{
-          .article{
-              margin-bottom: 10px;
-          }  
-        }
-        .right{
-            margin-left: 10px;
-            .social{
-                margin-bottom: 10px;
-            }
-            .category{
-                margin-bottom: 10px;
-            }
-        }
-    }
+<style lang="less" scoped>
 </style>

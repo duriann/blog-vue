@@ -1,41 +1,40 @@
 <template>
-    <div class="category">
-        <h2 class="title">友情链接</h2>
-        <ul class="items">
-            <li>栽培网-关注栽培技术</li>
-            <li>百蔬图-原创蔬菜图片</li>
-            <li>百蔬网-专业蔬菜种子</li>
-            <li>百蔬闻-关注蔬菜新闻</li>
-        </ul>
+  <div class="category">
+    <div class="title">
+      <i class="iconfont icon-fenlei"></i>
+      <span>分类:</span>
+      <span>种业风云</span>
+      <i class="iconfont icon-wifi"></i>
     </div>
+    <p class="ins">关注蔬菜发展</p>
+  </div>
 </template>
 <script>
 export default {
-    
+
 }
 </script>
 <style lang="less" scoped>
-    .category{
-        width: 360px;
-        background-color: #fff;
-        padding: 15px;
+.category {
+  height: 60px;
+  background-color: #fff;
+  padding: 10px 20px;
+  margin-bottom: 1px;
+  .title {
+    font-size: 22px;
+    color: #7a6f6f;
+    font-weight: normal;
+    i {
+      width: 16px;
+      font-size: 20px;
     }
-    .title{
-        font-size: 16px;
-        font-weight: normal;
-        line-height: 40px;
-        color: #1abc9c;
-        border-bottom: 1px solid #90bba8;
-        margin-bottom: 5px;
+    i.icon-wifi {
+      color: #f58128;
     }
-    .items{
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        color: #00a67c;
-        li{
-            height: 30px;
-            line-height: 30px;
-        }
-    }
+  }
+  .ins {
+    color: #666;
+    margin-top: 10px;
+  }
+}
 </style>
