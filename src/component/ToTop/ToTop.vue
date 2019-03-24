@@ -57,6 +57,7 @@ export default {
 .to-top {
   display: none;
   button {
+    outline: none;
     cursor: pointer;
     width: 36px;
     height: 36px;
