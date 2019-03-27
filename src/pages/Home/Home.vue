@@ -1,9 +1,11 @@
 <template>
-  <Common></Common>
+  
+  <div class="home">
+    <Common></Common>
+  </div>
 </template>
 <script>
 import Common from '../Common/Common'
-
 export default {
   components: {
     Common,
@@ -11,4 +13,5 @@ export default {
 }
 </script>
 <style lang="less" scoped>
+
 </style>

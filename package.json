@@ -25,6 +25,7 @@
     "@babel/preset-env": "^7.4.1",
     "@babel/runtime": "^7.4.0",
     "babel-loader": "^8.0.5",
+    "babel-plugin-component": "^1.1.1",
     "clean-webpack-plugin": "^2.0.1",
     "cross-env": "^5.2.0",
     "css-loader": "^2.1.1",
@@ -43,7 +44,12 @@
     "webpack-merge": "^4.2.1"
   },
   "dependencies": {
+    "axios": "^0.18.0",
+    "element-ui": "^2.6.3",
+    "quill-image-drop-module": "^1.0.3",
+    "quill-image-resize-module": "^3.0.0",
     "vue": "^2.6.10",
+    "vue-quill-editor": "^3.0.6",
     "vue-router": "^3.0.2"
   }
 }

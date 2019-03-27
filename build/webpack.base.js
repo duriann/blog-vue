@@ -1,6 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const webpack = require('webpack')
 const path = require('path')
 function resolve (dir) {
     return path.join(__dirname, '..', dir)
@@ -23,7 +24,7 @@ module.exports = {
             },
             {
                 test: /\.js$/,
-                exclude: /node_modules/,
+                exclude: /node_modules(?!\/quill-image-drop-module|quill-image-resize-module)/,
                 use: ['babel-loader'],
             },
             {
@@ -58,6 +59,10 @@ module.exports = {
             filename: 'index.html',
             template: './template.html',
         }),
-        new VueLoaderPlugin()
+        new VueLoaderPlugin(),
+        new webpack.ProvidePlugin({
+            'window.Quill': 'quill/dist/quill.js',
+            'Quill': 'quill/dist/quill.js'
+        }),
     ]
 }
