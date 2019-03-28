@@ -9,6 +9,7 @@ import Admin from '../pages/Admin/Admin'
 
 import User from '../pages/Admin/User/User'
 import ArticleAdd from '../pages/Admin/Article/ArticleAdd'
+import ArticleList from '../pages/Admin/Article/ArticleList'
 
 Vue.use(Router)
 
@@ -51,6 +52,11 @@ export default new Router({
                     path: '/article/add',
                     name: 'articleAdd',
                     component: ArticleAdd
+                },
+                {
+                    path: '/article/list',
+                    name: 'articleList',
+                    component: ArticleList
                 }
             ]
         }

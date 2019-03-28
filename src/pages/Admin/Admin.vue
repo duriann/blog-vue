@@ -1,5 +1,6 @@
 <template>
   <el-container class="home-container">
+
     <el-header class="home-header">
       <el-row :gutter="20">
         <el-col
@@ -119,6 +120,9 @@ export default {
       }
       this.activeMenu = path
     }
+  },
+  watch:{
+    '$route': 'setActiveMenu'
   }
 }
 </script>
