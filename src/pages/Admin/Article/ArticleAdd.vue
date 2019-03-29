@@ -48,7 +48,7 @@
       </el-col>
     </el-row>
     <el-row>
-      <el-col :offset="8">
+      <el-col :span="4" :offset="8">
         <el-button
           size="small"
           type="primary"

@@ -2,12 +2,8 @@
   <div class="common">
     <div class="left">
       <component :is="category"></component>
-      <Card type='Article'></Card>
-      <Card type='Article'></Card>
-      <Card type='Article'></Card>
-      <Card type='Article'></Card>
-      <Card type='Article'></Card>
-      <Card type='Article'></Card>
+      <Card type='Article' v-for="item in data" :key="item.id" :detail="item"></Card>
+      
     </div>
     <div class="right">
       <Social></Social>
@@ -21,11 +17,14 @@
 import Card from '@/component/Card/Card'
 import Social from '@/component/Social/Social'
 export default {
-  props: ['type'],
+  props: ['type','data'],
   data() {
     return {
-      category: null
+      category: null,
     }
+  },
+  methods: {
+    
   },
   computed: {
     loader() {
@@ -49,8 +48,10 @@ export default {
 </script>
 <style lang="less" scoped>
 .common {
+  justify-content: space-between;
   display: flex;
   .left {
+    flex:1;
     .article {
       margin-bottom: 10px;
     }

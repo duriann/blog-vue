@@ -122,6 +122,7 @@ export default {
     }
   },
   watch:{
+    //监听路由变化 让左侧的menu高亮
     '$route': 'setActiveMenu'
   }
 }

@@ -1,20 +1,27 @@
 <template>
   <div class="article">
     <div class="title">
-      <span class="category"><i></i>APP</span>
-      <span class="title-info">莴笋种植技术：教你该如何种植出又大又好的莴笋</span>
+      <span class="category"><i></i>{{detail.category.name}}</span>
+      <span class="title-info">{{detail.title}}</span>
     </div>
     <div class="content">
       <img
+      class="headimg"
+        v-if="!detail.headImg"
         src="http://www.baishujun.com/wp-content/themes/yusi1.0/timthumb.php?src=http://www.baishujun.com/wp-content/themes/yusi1.0/img/pic/6.jpg&h=123&w=200&q=90&zc=1&ct=1"
         alt=""
       >
+      <img
+      class="headimg"
+        v-else
+        :src="detail.headImg"
+        alt=""
+      >
       <div class="summary">
-        <span>
-          买种子就上农科百蔬，农科百蔬APP一直在紧张的编写过程中，最近也已经完工，目前已经在应用宝、华为市场、小米市场、oppo市场，豌豆荚、PP助手、安智市场等一系列较为火爆的APP应用市场上线，有兴趣的朋友欢迎下载，https://www.nkbaishu.com/down/inde...
+        <span class="summary-ins" v-html="detail.content.replace(/(<img.*?)>/g ,'')">
         </span>
         <p class="ins">
-          <span><i class="iconfont icon-iconfontgerenzhongxin"></i>白淑君</span>
+          <span><i class="iconfont icon-iconfontgerenzhongxin"></i>{{detail.author}}</span>
           <span><i class="iconfont icon-shijian"></i>七天前</span>
           <span><i class="iconfont icon-iconset0207"></i>62°C</span>
           <span><i class="iconfont icon-weibiaoti-"></i>1评论</span>
@@ -26,7 +33,10 @@
 </template>
 <script>
 export default {
-
+  props: ['detail'],
+  mounted(){
+    console.log('article 接收到的props ',this.detail);
+  }
 }
 </script>
 <style lang="less" scoped>
@@ -62,13 +72,29 @@ export default {
   }
   .content {
     display: flex;
-    img {
+    .headimg {
+      height: 123px;
+      width: 200px;
       margin-right: 20px;
     }
     .summary {
+      width: 100%;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      .summary-ins{
+        height: 80px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical;
+        & /deep/ img{
+          width: 200px;
+          height: 200px;
+        }
+      }
+      
     }
     .ins {
       align-self: flex-end;

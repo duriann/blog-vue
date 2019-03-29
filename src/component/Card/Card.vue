@@ -2,11 +2,12 @@
   <component
     :is="card"
     v-if="card"
+    :detail="detail"
   ></component>
 </template>
 <script>
 export default {
-  props: ['type'],
+  props: ['type','detail'],
   data() {
     return {
       card: null
@@ -22,6 +23,7 @@ export default {
     }
   },
   mounted() {
+    console.log('this.props.detail',this.detail)
     this.loader()
       .then(() => {
         this.card = () => this.loader()

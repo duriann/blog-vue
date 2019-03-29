@@ -15,7 +15,7 @@ Vue.use(Router)
 
 export default new Router({
     routes: [
-        { path: '/', redirect: '/user/list' },
+        { path: '/', redirect: '/home' },
         {
             path: '/index',
             name: 'index',
