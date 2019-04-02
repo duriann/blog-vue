@@ -10,6 +10,8 @@ import Admin from '../pages/Admin/Admin'
 import User from '../pages/Admin/User/User'
 import ArticleAdd from '../pages/Admin/Article/ArticleAdd'
 import ArticleList from '../pages/Admin/Article/ArticleList'
+import Archives from '../pages/Archives/Archives'
+
 
 Vue.use(Router)
 
@@ -35,6 +37,11 @@ export default new Router({
                     path: '/about',
                     name: 'about',
                     component: About
+                },
+                {
+                    path: '/archives/:id',
+                    name: 'archives',
+                    component: Archives
                 }
             ]
         },

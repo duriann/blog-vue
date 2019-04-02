@@ -116,7 +116,8 @@ export default {
       let path = this.$route.path
       console.log('path', path);
       if (path === '/admin') {
-        path = '/user/list'
+        // path = '/user/list'
+        this.$router.push('/user/list')
       }
       this.activeMenu = path
     }

@@ -69,6 +69,7 @@ import { quillEditor, Quill } from 'vue-quill-editor'
 
 import { ImageDrop } from 'quill-image-drop-module';
 import ImageResize from 'quill-image-resize-module';
+
 Quill.register('modules/imageResize', ImageResize);
 Quill.register('modules/imageDrop', ImageDrop);
 
@@ -105,6 +106,7 @@ export default {
       },
       editorOption: {
         modules: {
+          imageDrop: true,
           toolbar: {
             container: toolbarOps,  // 工具栏
             handlers: {
@@ -117,11 +119,6 @@ export default {
                 }
               }
             }
-          },
-          history: {
-            delay: 1000,
-            maxStack: 50,
-            userOnly: false
           },
           imageDrop: true,
           imageResize: {
@@ -221,10 +218,13 @@ export default {
 <style lang="less" scoped>
 .article_add {
   & /deep/ .ql-container {
-    height: 400px;
+    min-height: 400px;
   }
   & /deep/ input {
     border-radius: 0;
+  }
+  & /deep/ .ql-editor{
+    min-height: 400px;//修复设置了min-height后 编辑器空白区域不可点击
   }
 }
 </style>

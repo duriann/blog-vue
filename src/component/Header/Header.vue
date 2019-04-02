@@ -1,6 +1,6 @@
 <template>
   <div class="header">
-    <h1 class="title">百蔬君</h1>
+    <h1 class="title">菠萝君</h1>
     <span class="ins">-藏匿于农业界的安全猿，混迹于安全界的农博士</span>
   </div>
 </template>

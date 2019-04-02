@@ -2,7 +2,9 @@
   <div class="article">
     <div class="title">
       <span class="category"><i></i>{{detail.category.name}}</span>
-      <span class="title-info">{{detail.title}}</span>
+      <router-link class="router-title" :to="{path: '/archives/' + detail.id }">
+        <span class="title-info">{{detail.title}}</span>
+      </router-link>
     </div>
     <div class="content">
       <img
@@ -51,7 +53,7 @@ export default {
     position: relative;
     display: block;
     text-align: center;
-    width: 40px;
+    padding: 0 5px;
     height: 20px;
     color: #fff;
     background-color: #d9534f;
@@ -64,6 +66,9 @@ export default {
       border-top: 4px solid transparent;
       border-bottom: 4px solid transparent;
     }
+  }
+  .router-title{
+    width: auto;
   }
   .title-info {
     margin-left: 5px;

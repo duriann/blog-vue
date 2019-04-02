@@ -93,6 +93,7 @@ export default {
   background-color: #16a085;
 }
 .nav a {
+  width: 100%;
   line-height: 52px;
   text-align: center;
 }
