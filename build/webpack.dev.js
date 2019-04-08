@@ -12,7 +12,7 @@ module.exports = merge(base, {
         open: true,
         proxy: {
             '/api': {
-                target: 'http://localhost:8080',
+                target: 'http://localhost:7777',
                 pathRewrite: {
                     '^/api': ''
                 },

@@ -4,7 +4,7 @@
     <Header></Header>
     <Nav></Nav>
     <div class="content">
-      <Tip class="tip"></Tip>
+      <Tip class="tip"  @changeStatus='_changeStatus' :showLogin='showLogin'></Tip>
       <router-view></router-view>
     </div>
     <ToTop></ToTop>
@@ -23,6 +23,17 @@ export default {
     Nav,
     Tip,
     ToTop,
+  },
+  data(){
+    return {
+      showLogin: true
+    }
+  },
+  methods:{
+    _changeStatus(res){
+      console.log('修改父组件的值',res)
+      this.showLogin = res
+    }
   }
 }
 </script>
