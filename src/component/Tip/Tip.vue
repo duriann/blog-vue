@@ -1,28 +1,35 @@
 <template>
   <div class="tip">
-    <span class="info"><i class="iconfont icon-volume"></i> There are questions remain, We'll search for the answers together. But one thing we known for sure,the future is not set!</span>
-    <span class="login"  @click='login'><i class="iconfont icon-gerenzhongxin1"></i>登录</span>
-    <Login v-if="showLogin"></Login>
+    <span class="info">
+      <i class="iconfont icon-volume"></i> There are questions remain, We'll search for the answers together. But one thing we known for sure,the future is not set!
+    </span>
+    <span class="login" @click="login">
+      <i class="iconfont icon-gerenzhongxin1"></i>登录
+    </span>
+    <Login v-if="isShowLogin"></Login>
   </div>
 </template>
 <script>
-import Login from '@/component/Login/Login'
+import Login from "@/component/Login/Login";
 
 export default {
-  components:{
+  components: {
     Login
   },
-  props: ['showLogin'],
-  methods:{
-    login(){
-      console.log('login..')
-      this.$emit('changeStatus', !this.showLogin)
+  data() {
+    return {};
+  },
+  methods: {
+    login() {
+      this.$store.commit("showLogin");
     }
   },
-  mounted() {
-    
-  },
-}
+  computed: {
+    isShowLogin() {
+      return this.$store.state.isShowLogin;
+    }
+  }
+};
 </script>
 <style lang='less' scoped>
 .tip {

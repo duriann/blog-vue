@@ -1,38 +1,19 @@
 <template>
   <el-container class="home-container">
-
     <el-header class="home-header">
       <el-row :gutter="20">
-        <el-col
-          :span="3"
-          class="logo"
-        >
-          <img
-            src="@/assets/logo.png"
-            alt="bolo"
-          >
+        <el-col :span="3" class="logo">
+          <img src="@/assets/logo.png" alt="bolo">
         </el-col>
-        <el-col
-          :span="16"
-          class="title"
-        >
-          博客后台管理系统
-        </el-col>
+        <el-col :span="16" class="title">博客后台管理系统</el-col>
         <el-col :span="4">
           <span>欢迎xx</span>
-          <span
-            class="logout"
-            @click.prevent="logout"
-            href="#"
-          >退出</span>
+          <span class="logout" @click.prevent="logout" href="#">退出</span>
         </el-col>
       </el-row>
     </el-header>
     <el-container class="home-content">
-      <el-aside
-        width="200px"
-        class="home-aside"
-      >
+      <el-aside width="200px" class="home-aside">
         <el-menu
           class="menu"
           :unique-opened="true"
@@ -42,21 +23,12 @@
           text-color="#fff"
           active-text-color="#ffd04b"
         >
-
-          <el-submenu
-            :index="menu.path"
-            v-for="menu in menuList"
-            :key="menu.id"
-          >
+          <el-submenu :index="menu.path" v-for="menu in menuList" :key="menu.id">
             <template slot="title">
               <i class="el-icon-location"></i>
               <span>{{ menu.name }}</span>
             </template>
-            <el-menu-item
-              :index="child.path"
-              v-for="child in menu.children"
-              :key="child.id"
-            >
+            <el-menu-item :index="child.path" v-for="child in menu.children" :key="child.id">
               <i class="el-icon-menu"></i>
               <span>{{ child.name }}</span>
             </el-menu-item>
@@ -75,58 +47,60 @@ export default {
   data() {
     return {
       menuList: [],
-      activeMenu: '/user'
-    }
+      activeMenu: "/user"
+    };
   },
   created() {
-    this.fetchMenuList()
+    this.fetchMenuList();
 
-    this.setActiveMenu()
+    this.setActiveMenu();
   },
   methods: {
     async fetchMenuList() {
-      const ret = await this.$http.get(`/api/adminMenu/list`)
+      const ret = await this.$http.get(`/api/adminMenu/list`);
       console.log(ret);
-      const { code, data } = ret.data
+      const { code, data } = ret.data;
       if (code === 0) {
-        this.menuList = data
+        this.menuList = data;
       }
     },
     logout() {
-      this.$confirm('您确定退出吗?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      }).then(() => {
-        localStorage.removeItem('token')
-        this.$router.push('/login')
-
-        this.$message({
-          type: 'success',
-          message: '退出成功'
-        })
-      }).catch(() => {
-        this.$message({
-          type: 'info',
-          message: '已取退出'
-        })
+      this.$confirm("您确定退出吗?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
       })
+        .then(() => {
+          localStorage.removeItem("token");
+          this.$router.push("/login");
+
+          this.$message({
+            type: "success",
+            message: "退出成功"
+          });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取退出"
+          });
+        });
     },
     setActiveMenu() {
-      let path = this.$route.path
-      console.log('path', path);
-      if (path === '/admin') {
+      let path = this.$route.path;
+      console.log("path", path);
+      if (path === "/admin") {
         // path = '/user/list'
-        this.$router.push('/user/list')
+        this.$router.push("/user/list");
       }
-      this.activeMenu = path
+      this.activeMenu = path;
     }
   },
-  watch:{
+  watch: {
     //监听路由变化 让左侧的menu高亮
-    '$route': 'setActiveMenu'
+    $route: "setActiveMenu"
   }
-}
+};
 </script>
 
 <style lang="less" scoped>
