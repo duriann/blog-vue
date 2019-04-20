@@ -1,15 +1,13 @@
 <template>
   <div class="common">
     <div class="left">
-      
-      <Card type='Archive' ></Card>
-      
+      <Card type="Archive"></Card>
     </div>
     <div class="right">
       <Social></Social>
-      <Card type='Widget'></Card>
-      <Card type='Widget'></Card>
-      <Card type='Widget'></Card>
+      <Card type="Widget"></Card>
+      <Card type="Widget"></Card>
+      <Card type="Widget"></Card>
     </div>
   </div>
 </template>
@@ -17,21 +15,15 @@
 import Card from '@/component/Card/Card'
 import Social from '@/component/Social/Social'
 export default {
-  props: ['type','data'],
+  props: ['type', 'data'],
   data() {
     return {
-      category: null,
+      category: null
     }
   },
-  methods: {
-    
-  },
-  computed: {
-   
-  },
-  mounted() {
-   
-  },
+  methods: {},
+  computed: {},
+  mounted() {},
   components: {
     Card,
     Social
@@ -43,7 +35,7 @@ export default {
   justify-content: space-between;
   display: flex;
   .left {
-    flex:1;
+    flex: 1;
     .article {
       margin-bottom: 10px;
     }

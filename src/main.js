@@ -14,8 +14,8 @@ Vue.use(Vuex)
 Vue.prototype.$http = axios
 
 new Vue({
-    el: '#app',
-    store,
-    render: h => h(App),
-    router
+  el: '#app',
+  store,
+  render: h => h(App),
+  router
 })

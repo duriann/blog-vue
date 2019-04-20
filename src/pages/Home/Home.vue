@@ -1,5 +1,4 @@
 <template>
-  
   <div class="home">
     <Common :data="articles"></Common>
     <el-col>
@@ -8,52 +7,50 @@
         :total="totalCount"
         :page-size="pageSize"
         @current-change="pageHandle"
-      >
-      </el-pagination>
+      ></el-pagination>
     </el-col>
   </div>
 </template>
 <script>
 import Common from '../Common/Common'
 export default {
-  data(){
+  data() {
     return {
       currPage: 1,
-      pageSize: 3,
+      pageSize: 10,
       totalCount: 0,
       keyword: '',
       articles: []
     }
   },
   methods: {
-    pageHandle(currPage){
+    pageHandle(currPage) {
       this.getArticles(currPage)
     },
-    async getArticles(currPage = 1){
-      const res = await this.$http.get('/api/article/listByPage',{
+    async getArticles(currPage = 1) {
+      const res = await this.$http.get('/api/article/listByPage', {
         params: {
           keyword: this.keyword,
           currPage,
           pageSize: this.pageSize
         }
       })
-    const {data, code} = res.data
-      console.log(data,res)
-      if(code === 0){
-        this.currPage +=1
+      const { data, code } = res.data
+      console.log(data, res)
+      if (code === 0) {
+        this.currPage += 1
         this.totalCount = data.totalCount
         this.articles = data.pages
-      }    
+      }
     }
   },
-  mounted(){
+  mounted() {
     this.getArticles()
   },
   components: {
-    Common,
+    Common
   }
 }
 </script>
 <style lang="less" scoped>
-
 </style>

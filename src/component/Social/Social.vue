@@ -1,15 +1,21 @@
 <template>
   <div class="social">
-    <a href="#"><i class="iconfont icon-weibo"></i></a>
-    <a href="#"><i class="iconfont icon-youxiang"></i></a>
-    <a href="#"><i class="iconfont icon-weixin"></i></a>
-    <a href="#"><i class="iconfont icon-qq"></i></a>
+    <a href="#">
+      <i class="iconfont icon-weibo"></i>
+    </a>
+    <a href="#">
+      <i class="iconfont icon-youxiang"></i>
+    </a>
+    <a href="#">
+      <i class="iconfont icon-weixin"></i>
+    </a>
+    <a href="#">
+      <i class="iconfont icon-qq"></i>
+    </a>
   </div>
 </template>
 <script>
-export default {
-
-}
+export default {}
 </script>
 <style lang="less" scoped>
 .social {

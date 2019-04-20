@@ -3,33 +3,44 @@
     <span class="info">
       <i class="iconfont icon-volume"></i> There are questions remain, We'll search for the answers together. But one thing we known for sure,the future is not set!
     </span>
-    <span class="login" @click="login">
-      <i class="iconfont icon-gerenzhongxin1"></i>登录
+    <span v-if="!username" class="login" @click="login">
+      <i class="iconfont icon-gerenzhongxin1"></i>
+      登录
     </span>
+    <span v-else class="login">{{username}}</span>
     <Login v-if="isShowLogin"></Login>
   </div>
 </template>
 <script>
-import Login from "@/component/Login/Login";
+import Login from '@/component/Login/Login'
 
 export default {
   components: {
     Login
   },
   data() {
-    return {};
+    return {
+      username: ''
+    }
   },
   methods: {
     login() {
-      this.$store.commit("showLogin");
+      this.$store.commit('showLogin')
     }
   },
   computed: {
     isShowLogin() {
-      return this.$store.state.isShowLogin;
+      return this.$store.state.isShowLogin
+    }
+  },
+  mounted() {
+    let user = JSON.parse(localStorage.getItem('user'))
+    console.log('user in tip', user)
+    if (user) {
+      this.username = user.name
     }
   }
-};
+}
 </script>
 <style lang='less' scoped>
 .tip {

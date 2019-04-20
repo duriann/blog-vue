@@ -3,51 +3,27 @@
   <div class="container">
     <div class="new-comment">
       <div class="new-head">
-        <img
-          class="avatar"
-          src="../../assets/logo.png"
-          alt=""
-        >
+        <img class="avatar" src="../../assets/logo.png" alt>
         <textarea
           @focus="showAddHandle"
           placeholder="写下你的评论..."
           class="comment-content"
           cols="30"
           rows="10"
+          v-model="inputComment"
         ></textarea>
-
       </div>
-      <div
-        class="btn-control"
-        v-if="showAdd"
-      >
-        <span
-          class="cancel"
-          @click="cancel"
-        >取消</span>
-        <el-button
-          class="btn"
-          type="success"
-          round
-          @click="commitComment"
-        >确定</el-button>
+      <div class="btn-control" v-if="showAdd">
+        <span class="cancel" @click="cancel">取消</span>
+        <el-button class="btn" type="success" round @click="commitComment">确定</el-button>
       </div>
     </div>
     <div class="jingcai" v-if="comments.length>0">
-      <span >精彩评论({{comments.length}})</span>
+      <span>精彩评论({{comments.length}})</span>
     </div>
-    <div
-      class="comment"
-      v-for="item in comments"
-    >
-
+    <div class="comment" v-for="item in comments" :key="item.id">
       <div class="info">
-        <img
-          class="avatar"
-          :src="item.fromAvatar"
-          width="36"
-          height="36"
-        />
+        <img class="avatar" :src="item.fromAvatar" width="36" height="36">
         <div class="right">
           <div class="name">{{item.username}}</div>
           <div class="date">{{item.createTime}}</div>
@@ -55,56 +31,39 @@
       </div>
       <div class="content">{{item.content}}</div>
       <div class="control">
-        <span
-          class="like"
-          :class="{active: item.isLike}"
-          @click="likeClick(item)"
-        >
+        <span class="like" :class="{active: item.isLike}" @click="likeClick(item)">
           <i class="iconfont icon-like"></i>
           <span class="like-num">{{item.likeNum > 0 ? item.likeNum + '人赞' : '赞'}}</span>
         </span>
-        <span
-          class="comment-reply"
-          @click="showCommentInput(item)"
-        >
+        <!-- 回复子回复 -->
+        <span class="comment-reply" @click="showCommentInput(item)">
           <i class="iconfont icon-comment"></i>
           <span>回复</span>
         </span>
       </div>
+      <!-- 回复子回复中的回复 -->
       <div class="reply">
-        <div
-          class="item"
-          v-for="reply in item.children"
-        >
+        <div class="item" v-for="reply in item.children" :key="reply.id">
           <div class="reply-content">
-            <span class="from-name">{{reply.username}}</span><span>: </span>
+            <span class="from-name">{{reply.username}}</span>
+            <span>:</span>
             <span class="to-name">@{{reply.parentName}}</span>
             <span>{{reply.content}}</span>
           </div>
           <div class="reply-bottom">
             <span>{{reply.createTime}}</span>
-            <span
-              class="reply-text"
-              @click="showCommentInput(item, reply)"
-            >
+            <span class="reply-text" @click="showCommentInput(item, reply)">
               <i class="iconfont icon-comment"></i>
               <span>回复</span>
             </span>
           </div>
         </div>
-        <div
-          class="write-reply"
-          v-if="item.children.length > 0"
-          @click="showCommentInput(item)"
-        >
+        <div class="write-reply" v-if="item.children.length > 0" @click="showCommentInput(item)">
           <i class="el-icon-edit"></i>
           <span class="add-comment">添加新评论</span>
         </div>
         <transition name="fade">
-          <div
-            class="input-wrapper"
-            v-if="showItemId === item.id"
-          >
+          <div class="input-wrapper" v-if="showItemId === item.id">
             <el-input
               class="gray-bg-input"
               v-model="inputComment"
@@ -112,19 +71,10 @@
               :rows="3"
               autofocus
               placeholder="写下你的评论"
-            >
-            </el-input>
+            ></el-input>
             <div class="btn-control">
-              <span
-                class="cancel"
-                @click="cancel"
-              >取消</span>
-              <el-button
-                class="btn"
-                type="success"
-                round
-                @click="commitComment"
-              >确定</el-button>
+              <span class="cancel" @click="cancel">取消</span>
+              <el-button class="btn" type="success" round @click="commitComment">确定</el-button>
             </div>
           </div>
         </transition>
@@ -134,23 +84,26 @@
 </template>
 
 <script>
-
-import Vue from 'vue'
+import Vue from "vue";
 
 export default {
   props: {
     comments: {
       type: Array,
       required: true
+    },
+    articleId: {
+      required: true
     }
   },
   components: {},
   data() {
     return {
-      inputComment: '',
-      showItemId: '',
-      showAdd: false
-    }
+      inputComment: "",
+      showItemId: "",
+      showAdd: false,
+      showItemName: ""
+    };
   },
   computed: {},
   methods: {
@@ -163,12 +116,12 @@ export default {
     likeClick(item) {
       if (item.isLike === null) {
         Vue.$set(item, "isLike", true);
-        item.likeNum++
+        item.likeNum++;
       } else {
         if (item.isLike) {
-          item.likeNum--
+          item.likeNum--;
         } else {
-          item.likeNum++
+          item.likeNum++;
         }
         item.isLike = !item.isLike;
       }
@@ -178,15 +131,36 @@ export default {
      * 点击取消按钮
      */
     cancel() {
-      this.showItemId = ''
-      this.showAdd = false
+      this.inputComment = "";
+      this.showItemId = "";
+      this.showAdd = false;
     },
 
     /**
      * 提交评论
      */
-    commitComment() {
-      console.log(this.inputComment);
+    async commitComment() {
+      console.log(this.inputComment, this.articleId);
+      let user = JSON.parse(localStorage.getItem("user"));
+      console.log("user", user);
+      const res = await this.$http.post("/api/comment/add", {
+        userId: user.id,
+        articleId: this.articleId,
+        content: this.inputComment,
+        username: user.name || null,
+        parentId: this.showItemId || null,
+        parentName: this.showItemName || null
+      });
+      console.log(res);
+      const { code, msg } = res.data;
+      if (code === 0) {
+        this.$message({
+          type: "success",
+          message: msg
+        });
+        this.$emit("getArticle");
+        this.cancel();
+      }
     },
 
     /**
@@ -196,17 +170,19 @@ export default {
      */
     showCommentInput(item, reply) {
       if (reply) {
-        this.inputComment = "@" + reply.fromName + " "
+        this.inputComment = "@" + reply.username + " ";
       } else {
-        this.inputComment = ''
+        this.inputComment = "";
       }
-      this.showItemId = item.id
+      console.log("item", item);
+      this.showItemId = item.id;
+      this.showItemName = item.username;
     }
   },
   created() {
-    console.log(this.comments)
+    console.log(this.comments);
   }
-}
+};
 </script>
 
 <style scoped lang="less">
@@ -234,7 +210,7 @@ export default {
   padding: 0 10px;
   box-sizing: border-box;
   .new-comment {
-      margin-bottom: 40px;
+    margin-bottom: 40px;
 
     display: flex;
     flex-direction: column;
@@ -266,7 +242,7 @@ export default {
       border-radius: 50%;
       margin-right: 20px;
     }
-   
+
     .comment-content {
       padding: 10px 15px;
       width: 100%;
@@ -282,13 +258,13 @@ export default {
     }
   }
 
- .jingcai{
-      padding-bottom: 20px;
-      font-size: 17px;
-      font-weight: 700;
-      border-bottom: 1px solid #f0f0f0;
-      color: #333;
-    }
+  .jingcai {
+    padding-bottom: 20px;
+    font-size: 17px;
+    font-weight: 700;
+    border-bottom: 1px solid #f0f0f0;
+    color: #333;
+  }
 
   .comment {
     display: flex;

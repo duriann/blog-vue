@@ -83,6 +83,8 @@ export default {
         });
 
         this.hideLoginModal();
+
+        localStorage.setItem("user", JSON.stringify(data));
       } catch (e) {
         console.error(e);
       }

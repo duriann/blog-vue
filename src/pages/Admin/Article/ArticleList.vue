@@ -2,10 +2,7 @@
   <div>
     <el-row>
       <el-col :span="24">
-        <el-breadcrumb
-          separator-class="el-icon-arrow-right"
-          class="article-list-breadcrumb"
-        >
+        <el-breadcrumb separator-class="el-icon-arrow-right" class="article-list-breadcrumb">
           <el-breadcrumb-item :to="{ path: '/user/list' }">首页</el-breadcrumb-item>
           <el-breadcrumb-item>文章管理</el-breadcrumb-item>
           <el-breadcrumb-item>文章列表</el-breadcrumb-item>
@@ -14,84 +11,26 @@
     </el-row>
     <el-row>
       <el-col :span="4">
-        <el-input
-          placeholder="请输入内容"
-          v-model="keyword"
-        >
-        </el-input>
-
+        <el-input placeholder="请输入内容" v-model="keyword"></el-input>
       </el-col>
 
       <el-col :span="2">
-        <el-button
-          plain
-          icon="el-icon-search"
-        >搜索</el-button>
+        <el-button plain icon="el-icon-search">搜索</el-button>
       </el-col>
     </el-row>
-    <el-table
-      :data="tableData"
-      style="width: 100%;margin-top: 10px;"
-    >
-      <el-table-column
-        label="id"
-        width="60"
-        prop="id"
-      >
-      </el-table-column>
-      <el-table-column
-        label="标题"
-        prop='title'
-      >
-      </el-table-column>
-       <el-table-column
-        label="作者"
-        width="80"
-        prop='author'
-      >
-      </el-table-column>
-       <el-table-column
-        label="评论id"
-        width="60"
-        prop='comment_id'
-      >
-      </el-table-column>
-       <el-table-column
-        label="内容"
-        width="180"
-        prop='content'
-        :show-overflow-tooltip="true"
-      >
-      </el-table-column>
-       <el-table-column
-        label="分类"
-        width="100"
-        prop='category_id'
-      >
-      </el-table-column>
-      <el-table-column
-        label="创建时间"
-        width="100"
-        prop='createTime'
-      >
-      </el-table-column>
-      <el-table-column
-        label="更新时间"
-        width="100"
-        prop='updateTime'
-      >
-      </el-table-column>
+    <el-table :data="tableData" style="width: 100%;margin-top: 10px;">
+      <el-table-column label="id" width="60" prop="id"></el-table-column>
+      <el-table-column label="标题" prop="title"></el-table-column>
+      <el-table-column label="作者" width="80" prop="author"></el-table-column>
+      <el-table-column label="评论id" width="60" prop="comment_id"></el-table-column>
+      <el-table-column label="内容" width="180" prop="content" :show-overflow-tooltip="true"></el-table-column>
+      <el-table-column label="分类" width="100" prop="category_id"></el-table-column>
+      <el-table-column label="创建时间" width="100" prop="createTime"></el-table-column>
+      <el-table-column label="更新时间" width="100" prop="updateTime"></el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
-          <el-button
-            size="mini"
-            @click="handleEdit(scope.$index, scope.row)"
-          >编辑</el-button>
-          <el-button
-            size="mini"
-            type="danger"
-            @click="handleDelete(scope.$index, scope.row)"
-          >删除</el-button>
+          <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+          <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -101,10 +40,8 @@
         :total="totalCount"
         :page-size="pageSize"
         @current-change="pageHandle"
-      >
-      </el-pagination>
+      ></el-pagination>
     </el-col>
-
   </div>
 </template>
 <script>
@@ -119,33 +56,33 @@ export default {
     }
   },
   methods: {
-    pageHandle(currPage){
+    pageHandle(currPage) {
       this.getArticles(currPage)
     },
     handleEdit(index, row) {
-      console.log(index, row);
+      console.log(index, row)
     },
     handleDelete(index, row) {
-      console.log(index, row);
+      console.log(index, row)
     },
-    async getArticles(currPage = 1){
-      const res = await this.$http.get('/api/article/listByPage',{
+    async getArticles(currPage = 1) {
+      const res = await this.$http.get('/api/article/listByPage', {
         params: {
           keyword: this.keyword,
           currPage,
           pageSize: this.pageSize
         }
       })
-      const {data, code} = res.data
-      console.log(data,res)
-      if(code === 0){
-        this.currPage +=1
+      const { data, code } = res.data
+      console.log(data, res)
+      if (code === 0) {
+        this.currPage += 1
         this.totalCount = data.totalCount
         this.tableData = data.pages
       }
     }
   },
-  mounted(){
+  mounted() {
     this.getArticles()
   }
 }

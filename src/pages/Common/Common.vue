@@ -2,14 +2,13 @@
   <div class="common">
     <div class="left">
       <component :is="category"></component>
-      <Card type='Article' v-for="item in data" :key="item.id" :detail="item"></Card>
-      
+      <Card type="Article" v-for="item in data" :key="item.id" :detail="item"></Card>
     </div>
     <div class="right">
       <Social></Social>
-      <Card type='Widget'></Card>
-      <Card type='Widget'></Card>
-      <Card type='Widget'></Card>
+      <Card type="Widget"></Card>
+      <Card type="Widget"></Card>
+      <Card type="Widget"></Card>
     </div>
   </div>
 </template>
@@ -17,15 +16,13 @@
 import Card from '@/component/Card/Card'
 import Social from '@/component/Social/Social'
 export default {
-  props: ['type','data'],
+  props: ['type', 'data'],
   data() {
     return {
-      category: null,
+      category: null
     }
   },
-  methods: {
-    
-  },
+  methods: {},
   computed: {
     loader() {
       return () => import(`@/component/Card/${this.type}/${this.type}`)
@@ -51,7 +48,7 @@ export default {
   justify-content: space-between;
   display: flex;
   .left {
-    flex:1;
+    flex: 1;
     .article {
       margin-bottom: 10px;
     }

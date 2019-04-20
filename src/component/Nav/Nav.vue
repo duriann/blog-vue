@@ -8,7 +8,7 @@
           :key="item.id"
           :class="{current: item.isActive}"
         >
-          <router-link :to='item.url'>{{item.name}}</router-link>
+          <router-link :to="item.url">{{item.name}}</router-link>
         </li>
       </ul>
       <div class="search">
@@ -22,34 +22,34 @@ export default {
   data() {
     return {
       lis: [
-        { id: 1, name: '网站首页', url: '/home', isActive: true },
-        { id: 2, name: '新闻科普', url: '/news', isActive: false },
-        { id: 3, name: '学术研究', url: '/xueshu', isActive: false },
-        { id: 4, name: '生物技术', url: '/shengwu', isActive: false },
-        { id: 5, name: '编程技术', url: '/biancheng', isActive: false },
-        { id: 6, name: '安全运维', url: '/anquan', isActive: false },
-        { id: 7, name: '关于', url: '/about', },
+        { id: 1, name: "网站首页", url: "/home", isActive: true },
+        { id: 2, name: "新闻科普", url: "/news", isActive: false },
+        { id: 3, name: "学术研究", url: "/xueshu", isActive: false },
+        { id: 4, name: "生物技术", url: "/shengwu", isActive: false },
+        { id: 5, name: "编程技术", url: "/biancheng", isActive: false },
+        { id: 6, name: "安全运维", url: "/anquan", isActive: false },
+        { id: 7, name: "关于", url: "/about" }
       ]
-    }
+    };
   },
   methods: {
     active(url) {
-      let lis = this.lis
+      let lis = this.lis;
       lis.map(item => {
         if (item.url === url) {
-          item.isActive = true
+          item.isActive = true;
         } else {
-          item.isActive = false
+          item.isActive = false;
         }
-      })
-      this.lis = lis
+      });
+      this.lis = lis;
     }
   },
   mounted() {
     console.log(this.$route.path);
-    this.active(this.$route.path)
+    this.active(this.$route.path);
   }
-}
+};
 </script>
 <style lang="less" scoped>
 .nav {
@@ -96,5 +96,6 @@ export default {
   width: 100%;
   line-height: 52px;
   text-align: center;
+  color: #fff;
 }
 </style>
