@@ -5,10 +5,13 @@
     </span>
     <span v-if="!username" class="login" @click="login">
       <i class="iconfont icon-gerenzhongxin1"></i>
-      登录
+      {{username?usernmae:'登录'}}
     </span>
-    <span v-else class="login">{{username}}</span>
-    <Login v-if="isShowLogin"></Login>
+    <span v-else class="login logout">
+      <span>{{username}}</span>
+      <span @click="logout">退出</span>
+    </span>
+    <Login v-if="isShowLogin" @setUser="setUser"></Login>
   </div>
 </template>
 <script>
@@ -26,6 +29,31 @@ export default {
   methods: {
     login() {
       this.$store.commit('showLogin')
+    },
+    async logout(){
+      let user = localStorage.getItem('user')
+      let userObj = JSON.parse(user)
+      let res = await this.$http.get(`/api/user/logout?uid=${userObj.uid}`)
+      console.log(res)
+      if(res.data.code === 0){
+        localStorage.removeItem('user')
+        this.username = '登录'
+        this.$message({
+          type: 'success',
+          message: res.data.msg
+        })
+      }
+    },
+    setUser(username){
+     if(!username){
+        let user = JSON.parse(localStorage.getItem('user'))
+        console.log('user in tip', user)
+        if (user) {
+          return this.username = user.name
+        }
+        return
+     }
+     this.username = username
     }
   },
   computed: {
@@ -34,11 +62,7 @@ export default {
     }
   },
   mounted() {
-    let user = JSON.parse(localStorage.getItem('user'))
-    console.log('user in tip', user)
-    if (user) {
-      this.username = user.name
-    }
+    this.setUser()
   }
 }
 </script>
@@ -64,6 +88,14 @@ span.login {
     color: gray;
     font-size: 20px;
     vertical-align: middle;
+  }
+}
+span.logout {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  &:hover {
+    overflow: visible;
   }
 }
 </style>

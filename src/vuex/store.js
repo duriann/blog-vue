@@ -25,7 +25,7 @@ const store = new Vuex.Store({
             const { code, data } = res.data;
             if (code === 0) {
                 // console.log(code, this.getTreeData(data));
-                this.commit('getCategory')
+               commit('getCategory')
             }
         
        }

@@ -143,6 +143,12 @@ export default {
       console.log(this.inputComment, this.articleId);
       let user = JSON.parse(localStorage.getItem("user"));
       console.log("user", user);
+      if(!user){
+        return this.$message({
+          type: 'error',
+          message: '请先登录!'
+        })
+      }
       const res = await this.$http.post("/api/comment/add", {
         userId: user.id,
         articleId: this.articleId,
