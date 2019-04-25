@@ -64,6 +64,8 @@
         </div>
         <transition name="fade">
           <div class="input-wrapper" v-if="showItemId === item.id">
+            <el-tag v-if="replyName">{{replyName}}</el-tag>
+
             <el-input
               class="gray-bg-input"
               v-model="inputComment"
@@ -84,7 +86,7 @@
 </template>
 
 <script>
-import Vue from "vue";
+import Vue from 'vue'
 
 export default {
   props: {
@@ -99,31 +101,32 @@ export default {
   components: {},
   data() {
     return {
-      inputComment: "",
-      showItemId: "",
+      inputComment: '',
+      showItemId: '',
       showAdd: false,
-      showItemName: ""
-    };
+      showItemName: '',
+      replyName: ''
+    }
   },
   computed: {},
   methods: {
     showAddHandle() {
-      this.showAdd = true;
+      this.showAdd = true
     },
     /**
      * 点赞
      */
     likeClick(item) {
       if (item.isLike === null) {
-        Vue.$set(item, "isLike", true);
-        item.likeNum++;
+        Vue.$set(item, 'isLike', true)
+        item.likeNum++
       } else {
         if (item.isLike) {
-          item.likeNum--;
+          item.likeNum--
         } else {
-          item.likeNum++;
+          item.likeNum++
         }
-        item.isLike = !item.isLike;
+        item.isLike = !item.isLike
       }
     },
 
@@ -131,41 +134,41 @@ export default {
      * 点击取消按钮
      */
     cancel() {
-      this.inputComment = "";
-      this.showItemId = "";
-      this.showAdd = false;
+      this.inputComment = ''
+      this.showItemId = ''
+      this.showAdd = false
     },
 
     /**
      * 提交评论
      */
     async commitComment() {
-      console.log(this.inputComment, this.articleId);
-      let user = JSON.parse(localStorage.getItem("user"));
-      console.log("user", user);
-      if(!user){
+      console.log(this.inputComment, this.articleId)
+      let user = JSON.parse(localStorage.getItem('user'))
+      console.log('user', user)
+      if (!user) {
         return this.$message({
           type: 'error',
           message: '请先登录!'
         })
       }
-      const res = await this.$http.post("/api/comment/add", {
+      const res = await this.$http.post('/comment/add', {
         userId: user.id,
         articleId: this.articleId,
         content: this.inputComment,
         username: user.name || null,
         parentId: this.showItemId || null,
         parentName: this.showItemName || null
-      });
-      console.log(res);
-      const { code, msg } = res.data;
+      })
+      console.log(res)
+      const { code, msg } = res.data
       if (code === 0) {
         this.$message({
-          type: "success",
+          type: 'success',
           message: msg
-        });
-        this.$emit("getArticle");
-        this.cancel();
+        })
+        this.$emit('getArticle')
+        this.cancel()
       }
     },
 
@@ -176,19 +179,20 @@ export default {
      */
     showCommentInput(item, reply) {
       if (reply) {
-        this.inputComment = "@" + reply.username + " ";
+        this.replyName = '@' + reply.username + ' '
+        this.showItemName = reply.username
       } else {
-        this.inputComment = "";
+        this.inputComment = ''
+        this.showItemName = item.username
       }
-      console.log("item", item);
-      this.showItemId = item.id;
-      this.showItemName = item.username;
+      console.log('item', item)
+      this.showItemId = item.id
     }
   },
   created() {
-    console.log(this.comments);
+    console.log(this.comments)
   }
-};
+}
 </script>
 
 <style scoped lang="less">

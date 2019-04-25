@@ -1,5 +1,7 @@
 import vue from 'vue'
 import Vuex from 'vuex'
+import http from '@/utils/Http.js'
+import {treeToList} from '@/utils/index'
 vue.use(Vuex)
 
 const store = new Vuex.Store({
@@ -15,17 +17,17 @@ const store = new Vuex.Store({
             state.isShowLogin = false;
         },
         getCategory(state,payload){
-            state.category = payload.category
+            console.log('payload,',payload)
+            state.category = payload.data
         }
     },  
     actions: {
       async getCategory({commit}){
-           const res = await this.$http.get("/api/category/list");
-            console.log("res", res);
-            const { code, data } = res.data;
+            const res = await http.get("/category/list");
+            const { code } = res.data;
             if (code === 0) {
-                // console.log(code, this.getTreeData(data));
-               commit('getCategory')
+                console.log('res.data', res.data);
+               commit('getCategory',res.data)
             }
         
        }

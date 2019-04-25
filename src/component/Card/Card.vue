@@ -1,13 +1,10 @@
 <template>
-  <component
-    :is="card"
-    v-if="card"
-    :detail="detail"
-  ></component>
+  <component :is="card" v-if="card" :detail="detail" :mark="mark"></component>
 </template>
 <script>
 export default {
-  props: ['type','detail'],
+  //mark 用于判断widget 需要获取什么样的数据
+  props: ['type', 'detail', 'mark'],
   data() {
     return {
       card: null
@@ -15,7 +12,6 @@ export default {
   },
   computed: {
     loader() {
-      console.log('this.type', this.type)
       if (!this.type) {
         return null
       }
@@ -23,7 +19,6 @@ export default {
     }
   },
   mounted() {
-    console.log('this.props.detail',this.detail)
     this.loader()
       .then(() => {
         this.card = () => this.loader()

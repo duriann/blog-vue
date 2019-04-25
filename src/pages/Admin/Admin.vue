@@ -47,60 +47,60 @@ export default {
   data() {
     return {
       menuList: [],
-      activeMenu: "/user"
-    };
+      activeMenu: '/user'
+    }
   },
   created() {
-    this.fetchMenuList();
+    this.fetchMenuList()
 
-    this.setActiveMenu();
+    this.setActiveMenu()
   },
   methods: {
     async fetchMenuList() {
-      const ret = await this.$http.get(`/api/adminMenu/list`);
-      console.log(ret);
-      const { code, data } = ret.data;
+      const ret = await this.$http.get(`/adminMenu/list`)
+      console.log(ret)
+      const { code, data } = ret.data
       if (code === 0) {
-        this.menuList = data;
+        this.menuList = data
       }
     },
     logout() {
-      this.$confirm("您确定退出吗?", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning"
+      this.$confirm('您确定退出吗?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
       })
         .then(() => {
-          localStorage.removeItem("token");
-          this.$router.push("/login");
+          localStorage.removeItem('token')
+          this.$router.push('/login')
 
           this.$message({
-            type: "success",
-            message: "退出成功"
-          });
+            type: 'success',
+            message: '退出成功'
+          })
         })
         .catch(() => {
           this.$message({
-            type: "info",
-            message: "已取退出"
-          });
-        });
+            type: 'info',
+            message: '已取退出'
+          })
+        })
     },
     setActiveMenu() {
-      let path = this.$route.path;
-      console.log("path", path);
-      if (path === "/admin") {
+      let path = this.$route.path
+      console.log('path', path)
+      if (path === '/admin') {
         // path = '/user/list'
-        this.$router.push("/user/list");
+        this.$router.push('/user/list')
       }
-      this.activeMenu = path;
+      this.activeMenu = path
     }
   },
   watch: {
     //监听路由变化 让左侧的menu高亮
-    $route: "setActiveMenu"
+    $route: 'setActiveMenu'
   }
-};
+}
 </script>
 
 <style lang="less" scoped>

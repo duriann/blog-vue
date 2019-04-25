@@ -6,12 +6,12 @@ import './assets/reset.css'
 import './assets/fonts/iconfont.css'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css';
-import axios from 'axios'
+import http from '@/utils/Http'
 import store from './vuex/store'
 
 Vue.use(ElementUI)
 Vue.use(Vuex)
-Vue.prototype.$http = axios
+Vue.prototype.$http = http
 
 new Vue({
   el: '#app',

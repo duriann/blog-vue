@@ -28,7 +28,7 @@ export default {
       this.getArticles(currPage)
     },
     async getArticles(currPage = 1) {
-      const res = await this.$http.get('/api/article/listByPage', {
+      const res = await this.$http.get('/article/listByPage', {
         params: {
           keyword: this.keyword,
           currPage,
@@ -36,7 +36,6 @@ export default {
         }
       })
       const { data, code } = res.data
-      console.log(data, res)
       if (code === 0) {
         this.currPage += 1
         this.totalCount = data.totalCount

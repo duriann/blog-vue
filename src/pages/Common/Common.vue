@@ -6,9 +6,9 @@
     </div>
     <div class="right">
       <Social></Social>
-      <Card type="Widget"></Card>
-      <Card type="Widget"></Card>
-      <Card type="Widget"></Card>
+      <Card type="Widget" mark="category"></Card>
+      <Card type="Widget" mark="article"></Card>
+      <!--  <Card type="Widget"></Card>-->
     </div>
   </div>
 </template>

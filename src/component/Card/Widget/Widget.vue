@@ -1,17 +1,56 @@
 <template>
   <div class="widget">
-    <h2 class="title">友情链接</h2>
+    <h2 class="title">{{title}}</h2>
     <ul class="items">
-      <li>栽培网-关注栽培技术</li>
-      <li>百蔬图-原创蔬菜图片</li>
-      <li>百蔬网-专业蔬菜种子</li>
-      <li>百蔬闻-关注蔬菜新闻</li>
+      <li v-for="item in data" :key="item.id" :class="mark">
+        <span>{{item.name || item.title}}</span>
+        <span class="time">{{item.createTime}}</span>
+        <!--当mark为article的时候 要显示时间-->
+      </li>
     </ul>
   </div>
 </template>
 <script>
+import { treeToList } from '@/utils/index'
 export default {
-
+  props: ['mark'],
+  data() {
+    return {
+      data: [],
+      title: ''
+    }
+  },
+  methods: {
+    async getCategory() {
+      if (this.$store.state.category.length === 0) {
+        await this.$store.dispatch('getCategory')
+      } else {
+      }
+      let cate = JSON.parse(JSON.stringify(this.$store.state.category))
+      this.data = treeToList(cate)
+    },
+    async getRecentArticle() {
+      let res = await this.$http.get('/article/getRecent')
+      let { code, data } = res.data
+      if (code === 0) {
+        this.data = data
+      }
+      console.log('articles', res)
+    }
+  },
+  mounted() {
+    console.log('this.mark', this.mark)
+    switch (this.mark) {
+      case 'category':
+        this.title = '分类'
+        return this.getCategory()
+      case 'article':
+        this.title = '近期文章'
+        return this.getRecentArticle()
+      default:
+        0
+    }
+  }
 }
 </script>
 <style lang="less" scoped>
@@ -34,8 +73,17 @@ export default {
   justify-content: space-between;
   color: #00a67c;
   li {
-    height: 30px;
+    width: 50%;
+    // height: 30px;
     line-height: 30px;
+    &.article {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+    .time {
+      color: #999;
+    }
   }
 }
 </style>

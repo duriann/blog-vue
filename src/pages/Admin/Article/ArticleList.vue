@@ -66,7 +66,7 @@ export default {
       console.log(index, row)
     },
     async getArticles(currPage = 1) {
-      const res = await this.$http.get('/api/article/listByPage', {
+      const res = await this.$http.get('/article/listByPage', {
         params: {
           keyword: this.keyword,
           currPage,

@@ -1,33 +1,41 @@
 <template>
   <div class="article">
     <div class="title">
-      <span class="category"><i></i>{{detail.category.name}}</span>
+      <span class="category">
+        <i></i>
+        {{detail.category.name}}
+      </span>
       <router-link class="router-title" :to="{path: '/archives/' + detail.id }">
         <span class="title-info">{{detail.title}}</span>
       </router-link>
     </div>
     <div class="content">
       <img
-      class="headimg"
+        class="headimg"
         v-if="!detail.headImg"
         src="http://www.baishujun.com/wp-content/themes/yusi1.0/timthumb.php?src=http://www.baishujun.com/wp-content/themes/yusi1.0/img/pic/6.jpg&h=123&w=200&q=90&zc=1&ct=1"
-        alt=""
+        alt
       >
-      <img
-      class="headimg"
-        v-else
-        :src="detail.headImg"
-        alt=""
-      >
+      <img class="headimg" v-else :src="detail.headImg" alt>
       <div class="summary">
-        <span class="summary-ins" v-html="detail.content.replace(/(<img.*?)>/g ,'')">
-        </span>
+        <span class="summary-ins" v-html="detail.content.replace(/(<img.*?)>/g ,'')"></span>
         <p class="ins">
-          <span><i class="iconfont icon-iconfontgerenzhongxin"></i>{{detail.author}}</span>
-          <span><i class="iconfont icon-shijian"></i>七天前</span>
-          <span><i class="iconfont icon-iconset0207"></i>62°C</span>
-          <span><i class="iconfont icon-weibiaoti-"></i>1评论</span>
-          <span><i class="iconfont icon-icon-test"></i>0喜欢</span>
+          <span>
+            <i class="iconfont icon-iconfontgerenzhongxin"></i>
+            {{detail.author}}
+          </span>
+          <span>
+            <i class="iconfont icon-shijian"></i>七天前
+          </span>
+          <span>
+            <i class="iconfont icon-iconset0207"></i>62°C
+          </span>
+          <span>
+            <i class="iconfont icon-weibiaoti-"></i>1评论
+          </span>
+          <span>
+            <i class="iconfont icon-icon-test"></i>0喜欢
+          </span>
         </p>
       </div>
     </div>
@@ -36,9 +44,7 @@
 <script>
 export default {
   props: ['detail'],
-  mounted(){
-    console.log('article 接收到的props ',this.detail);
-  }
+  mounted() {}
 }
 </script>
 <style lang="less" scoped>
@@ -67,7 +73,7 @@ export default {
       border-bottom: 4px solid transparent;
     }
   }
-  .router-title{
+  .router-title {
     width: auto;
   }
   .title-info {
@@ -87,19 +93,18 @@ export default {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      .summary-ins{
+      .summary-ins {
         height: 80px;
         overflow: hidden;
         text-overflow: ellipsis;
         display: -webkit-box;
         -webkit-line-clamp: 4;
         -webkit-box-orient: vertical;
-        & /deep/ img{
+        & /deep/ img {
           width: 200px;
           height: 200px;
         }
       }
-      
     }
     .ins {
       align-self: flex-end;

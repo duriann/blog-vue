@@ -28,7 +28,7 @@
   </div>
 </template>
 <script>
-import Comment from "../../comment/Comment";
+import Comment from '../../comment/Comment'
 
 export default {
   components: {
@@ -38,36 +38,36 @@ export default {
     return {
       article: {},
       comments: []
-    };
+    }
   },
   methods: {
     async getArticle() {
-      const res = await this.$http.get("/api/article/get", {
+      const res = await this.$http.get('/article/get', {
         params: {
           id: this.$route.params.id
         }
-      });
-      console.log("archive", res);
+      })
+      console.log('archive', res)
       if (res.data.code === 0) {
-        this.article = res.data.data;
-        this.getComments(res.data.data.id); //当成功获取到文章的时候 再去请求该文章的评论
+        this.article = res.data.data
+        this.getComments(res.data.data.id) //当成功获取到文章的时候 再去请求该文章的评论
       }
     },
     async getComments(id) {
-      const res = await this.$http.get("/api/comment/getById", {
+      const res = await this.$http.get('/comment/getById', {
         params: {
           id
         }
-      });
+      })
       if (res.data.code === 0) {
-        this.comments = res.data.data;
+        this.comments = res.data.data
       }
     }
   },
   mounted() {
-    this.getArticle();
+    this.getArticle()
   }
-};
+}
 </script>
 <style lang="less" scoped>
 .archive {

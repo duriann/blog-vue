@@ -31,70 +31,85 @@
   </div>
 </template>
 <script>
-import jsencrypt from "jsencrypt";
-var encrypt = new JSEncrypt();
+import jsencrypt from 'jsencrypt'
+var encrypt = new JSEncrypt()
 export default {
   data() {
     return {
       ruleForm: {
-        username: "",
-        password: ""
+        username: '',
+        password: ''
       },
       rules: {
         username: [
-          { required: true, message: "请输入用户名", trigger: "blur" },
-          { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" }
+          { required: true, message: '请输入用户名', trigger: 'blur' },
+          { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
         ],
         password: [
-          { required: true, message: "请输入密码", trigger: "blur" },
-          { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" }
+          { required: true, message: '请输入密码', trigger: 'blur' },
+          { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
         ]
       }
-    };
+    }
   },
   methods: {
     async getPublicKey() {
-      const res = await this.$http.get("/api/user/getPublicKey");
-      let publicKey = res.data;
-      encrypt.setPublicKey(publicKey);
+      const res = await this.$http.get('/user/getPublicKey')
+      let publicKey = res.data
+      encrypt.setPublicKey(publicKey)
     },
     async login(ruleForm) {
-      await this.getPublicKey();
+      await this.getPublicKey()
       try {
         //这边使用try-catch以后 可以不必判断validate的返回值，当校验不通过的时候，会自然进到catch代码块中
-        await this.$refs[ruleForm].validate();
+        await this.$refs[ruleForm].validate()
 
-        const res = await this.$http.post("/api/user/login", {
+        const res = await this.$http.post('/user/login', {
           username: this.ruleForm.username,
           password: encrypt.encrypt(this.ruleForm.password)
-        });
-        console.log(res);
-        const { code, msg, data } = res.data;
+        })
+        console.log(res)
+        const { code, msg, data } = res.data
         if (code === 1) {
           return this.$message({
             message: msg,
-            type: "error"
-          });
+            type: 'error'
+          })
         }
 
         this.$message({
           message: msg,
-          type: "success"
-        });
+          type: 'success'
+        })
 
-        this.hideLoginModal();
-        this.$emit('setUser',data.name)
-        localStorage.setItem("user", JSON.stringify(data));
+        this.hideLoginModal()
+        this.$emit('setUser', data.name)
+        localStorage.setItem('user', JSON.stringify(data))
       } catch (e) {
-        console.error(e);
+        this.$message({
+          message: '用户名或者密码不能为空!',
+          type: 'error'
+        })
+        console.error(e)
       }
     },
 
     hideLoginModal() {
-      this.$store.commit("hideLogin");
+      this.$store.commit('hideLogin')
     }
+  },
+  mounted() {
+    window.addEventListener('keydown', e => {
+      if (e.keyCode === 13) {
+        //回车
+        this.login('ruleForm')
+      }
+    })
+  },
+  destroyed() {
+    window.removeEventListener('keydown')
   }
-};
+}
 </script>
 <style lang="less" scoped>
 .login {

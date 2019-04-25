@@ -5,11 +5,11 @@
     </span>
     <span v-if="!username" class="login" @click="login">
       <i class="iconfont icon-gerenzhongxin1"></i>
-      {{username?usernmae:'登录'}}
+      登录
     </span>
     <span v-else class="login logout">
       <span>{{username}}</span>
-      <span @click="logout">退出</span>
+      <span @click="logout" class="test">退出</span>
     </span>
     <Login v-if="isShowLogin" @setUser="setUser"></Login>
   </div>
@@ -30,30 +30,28 @@ export default {
     login() {
       this.$store.commit('showLogin')
     },
-    async logout(){
+    async logout() {
       let user = localStorage.getItem('user')
       let userObj = JSON.parse(user)
-      let res = await this.$http.get(`/api/user/logout?uid=${userObj.uid}`)
-      console.log(res)
-      if(res.data.code === 0){
+      try {
+        let res = await this.$http.get(`/user/logout?uid=${userObj.uid}`)
         localStorage.removeItem('user')
-        this.username = '登录'
+        this.username = ''
         this.$message({
           type: 'success',
           message: res.data.msg
         })
-      }
+      } catch (e) {}
     },
-    setUser(username){
-     if(!username){
+    setUser(username) {
+      if (!username) {
         let user = JSON.parse(localStorage.getItem('user'))
-        console.log('user in tip', user)
         if (user) {
-          return this.username = user.name
+          return (this.username = user.name)
         }
         return
-     }
-     this.username = username
+      }
+      this.username = username
     }
   },
   computed: {
@@ -94,6 +92,7 @@ span.logout {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  z-index: 999;
   &:hover {
     overflow: visible;
   }
