@@ -20,10 +20,12 @@ export default {
         document.documentElement.scrollTop ||
         document.body.scrollTop ||
         window.pageYOffset
-      if (scrollTop > 200) {
-        toTop.style.display = 'block'
-      } else {
-        toTop.style.display = 'none'
+        if(toTop){
+          if (scrollTop > 200) {
+          toTop.style.display = 'block'
+        } else {
+          toTop.style.display = 'none'
+        }
       }
     },
     throttling(fn, wait, maxTimelong) {

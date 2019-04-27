@@ -95,19 +95,21 @@ export default {
     },
 
     hideLoginModal() {
+      this.$destroy()
       this.$store.commit('hideLogin')
-    }
-  },
-  mounted() {
-    window.addEventListener('keydown', e => {
-      if (e.keyCode === 13) {
+    },
+    bindKeyDown(e){
+    if (e.keyCode === 13) {
         //回车
         this.login('ruleForm')
       }
-    })
+    }
+  },
+  mounted() {
+    window.addEventListener('keydown',this.bindKeyDown)
   },
   destroyed() {
-    window.removeEventListener('keydown')
+    window.removeEventListener('keydown',this.bindKeyDown)
   }
 }
 </script>

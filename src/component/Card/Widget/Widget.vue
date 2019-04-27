@@ -27,6 +27,7 @@ export default {
       } else {
       }
       let cate = JSON.parse(JSON.stringify(this.$store.state.category))
+      cate = cate.filter(item=>item.isNav===0)//过滤掉是nav导航的分类
       this.data = treeToList(cate)
     },
     async getRecentArticle() {

@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import Home from '../pages/Home/Home'
-import News from '../pages/News/News'
+import FrontEnd from '../pages/FrontEnd/FrontEnd'
 import About from '../pages/About/About'
 import Index from '../pages/Index/Index'
 import Admin from '../pages/Admin/Admin'
@@ -29,9 +29,9 @@ export default new Router({
                     component: Home
                 },
                 {
-                    path: '/news',
-                    name: 'news',
-                    component: News
+                    path: '/frontend',
+                    name: 'frontend',
+                    component: FrontEnd
                 },
                 {
                     path: '/about',

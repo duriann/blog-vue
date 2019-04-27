@@ -159,8 +159,8 @@ export default {
       if (this.$store.state.category.length === 0) {
         this.$store.dispatch('getCategory')
       }
-
-      this.categories = this.getTreeData(this.$store.state.category)
+      
+      this.categories = this.getTreeData(this.$store.state.category.filter(item=>item.isNav===0))
     },
     getTreeData(data) {
       // 循环遍历json数据

@@ -1,5 +1,5 @@
 <template>
-  <div class="news">
+  <div class="front-end">
     <Common type='Category'></Common>
   </div>
 </template>
