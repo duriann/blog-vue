@@ -14,6 +14,19 @@ module.exports = {
             '@': resolve('src')
         }
     },
+    externals: {
+        // 键：表示 导入包语法 from 后面跟着的名称
+        // 值：表示 script 引入JS文件时，在全局环境中的变量名称
+        vue: 'Vue',
+        vuex: 'Vuex',
+        axios: 'axios',
+        'vue-router': 'VueRouter',
+        // 注意：带有样式文件的第三方包，需要在 代码中 将样式注释掉
+        'vue-quill-editor': 'VueQuillEditor',
+        'quill-image-resize-module': 'ImageResize',
+        'moment': 'moment',
+        'element-ui': 'ELEMENT',
+    },
     module: {
         rules: [
             {

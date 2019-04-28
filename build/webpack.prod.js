@@ -1,8 +1,10 @@
 const path = require('path')
+const webpack = require('webpack')
 const base = require('./webpack.base.js')
 const merge = require('webpack-merge')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 let result =  merge(base,{
     mode: 'production',
@@ -17,8 +19,10 @@ let result =  merge(base,{
         }),
         new MiniCssExtractPlugin({
             filename: "css/[name].[contenthash].css"
-        })
+        }),
+        //分析打包文件大小
+        new BundleAnalyzerPlugin(),
+       
     ]
 })
-console.log(process.env.NODE_ENV,result)
 module.exports = result

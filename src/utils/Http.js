@@ -1,9 +1,8 @@
 // import axios from 'axios'
 import axios from 'axios'
-import { message } from 'element-ui'
 import moment from 'moment'
 
-axios.defaults.baseURL = 'http://127.0.0.1:9999/api'
+// axios.defaults.baseURL = 'http://127.0.0.1:9999/api'
 
 axios.interceptors.request.use(config=> {
   return config;

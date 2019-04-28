@@ -47,7 +47,7 @@ export default {
     Common
   },
   mounted() {
-    this.cname = this.$route.query.name
+    this.cname = this.$route.params.name
     this.getArticles()
   }
 }

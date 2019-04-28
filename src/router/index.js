@@ -1,23 +1,23 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import Home from '../pages/Home/Home'
-import FrontEnd from '../pages/FrontEnd/FrontEnd'
-import FEVue from '../pages/FrontEnd/Vue/FEVue'
-import React from '../pages/FrontEnd/React/React'
+const Home = () => import(/* webpackChunkName: 'home' */ '../pages/Home/Home')
+const FrontEnd = () => import(/* webpackChunkName: 'FrontEnd' */ '../pages/FrontEnd/FrontEnd')
+const FEVue = () => import(/* webpackChunkName: 'FEVue' */ '../pages/FrontEnd/Vue/FEVue')
+const React = () => import(/* webpackChunkName: 'React' */ '../pages/FrontEnd/React/React')
 
 
-import BackEnd from '../pages/BackEnd/BackEnd'
-import Java from '../pages/BackEnd/Java/Java'
-import ThinkAbout from '../pages/ThinkAbout/ThinkAbout'
+const BackEnd = () => import(/* webpackChunkName: 'BackEnd' */ '../pages/BackEnd/BackEnd')
+const Java = () => import(/* webpackChunkName: 'Java' */ '../pages/BackEnd/Java/Java')
+const ThinkAbout = () => import(/* webpackChunkName: 'ThinkAbout' */ '../pages/ThinkAbout/ThinkAbout')
 
-import Index from '../pages/Index/Index'
-import Admin from '../pages/Admin/Admin'
+const Index = () => import(/* webpackChunkName: 'Index' */ '../pages/Index/Index')
+const Admin = () => import(/* webpackChunkName: 'Admin' */ '../pages/Admin/Admin')
 
-import User from '../pages/Admin/User/User'
-import ArticleAdd from '../pages/Admin/Article/ArticleAdd'
-import ArticleList from '../pages/Admin/Article/ArticleList'
-import Archives from '../pages/Archives/Archives'
+const User = () => import(/* webpackChunkName: 'User' */ '../pages/Admin/User/User')
+const ArticleAdd = () => import(/* webpackChunkName: 'ArticleAdd' */ '../pages/Admin/Article/ArticleAdd')
+const ArticleList = () => import(/* webpackChunkName: 'ArticleList' */ '../pages/Admin/Article/ArticleList')
+const Archives = () => import(/* webpackChunkName: 'Archives' */ '../pages/Archives/Archives')
 
 
 Vue.use(Router)

@@ -2,10 +2,12 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import App from './App.vue'
 import router from './router/index'
+
+import ElementUI from 'element-ui'
+
 import './assets/reset.css'
 import './assets/fonts/iconfont.css'
-import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css';
+// import 'element-ui/lib/theme-chalk/index.css'; 使用cdn的时候不需要导入样式
 import http from '@/utils/Http'
 import store from './vuex/store'
 
@@ -15,7 +17,7 @@ Vue.prototype.$http = http
 
 router.beforeEach((to, from, next) => {
   // 给每个路由传递一个name参数
-  to.query.name = to.name
+  to.params.name = to.name
   
   next()
 })

@@ -46,12 +46,13 @@
 </template>
 
 <script>
-import 'quill/dist/quill.core.css'
-import 'quill/dist/quill.snow.css'
+// import 'quill/dist/quill.core.css'
+// import 'quill/dist/quill.snow.css'
 
 import { quillEditor, Quill } from 'vue-quill-editor'
 
 import { ImageDrop } from 'quill-image-drop-module'
+
 import ImageResize from 'quill-image-resize-module'
 
 Quill.register('modules/imageResize', ImageResize)

@@ -6,7 +6,8 @@
   "scripts": {
     "start": "npm run dev",
     "build": "cross-env NODE_ENV=production webpack --config ./build/webpack.prod.js",
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --config ./build/webpack.dev.js"
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --config ./build/webpack.dev.js",
+    "analyz": "cross-env NODE_ENV=production npm_config_report=true npm run build"
   },
   "repository": {
     "type": "git",
@@ -40,13 +41,13 @@
     "vue-loader": "^15.7.0",
     "vue-template-compiler": "^2.6.10",
     "webpack": "^4.29.6",
+    "webpack-bundle-analyzer": "^3.3.2",
     "webpack-cli": "^3.3.0",
     "webpack-dev-server": "^3.2.1",
     "webpack-merge": "^4.2.1"
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "element-ui": "^2.6.3",
     "jsencrypt": "^3.0.0-rc.1",
     "quill-image-drop-module": "^1.0.3",
     "quill-image-resize-module": "^3.0.0",
