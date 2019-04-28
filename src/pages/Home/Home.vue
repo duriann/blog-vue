@@ -1,14 +1,11 @@
 <template>
   <div class="home">
-    <Common :data="articles"></Common>
-    <el-col>
-      <el-pagination
-        layout="prev, pager, next"
-        :total="totalCount"
-        :page-size="pageSize"
-        @current-change="pageHandle"
-      ></el-pagination>
-    </el-col>
+    <Common
+      :data="articles"
+      :totalCount="totalCount"
+      :pageSize="pageSize"
+      @getCommonData="getArticles"
+    ></Common>
   </div>
 </template>
 <script>

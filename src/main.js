@@ -13,6 +13,12 @@ Vue.use(ElementUI)
 Vue.use(Vuex)
 Vue.prototype.$http = http
 
+router.beforeEach((to, from, next) => {
+  // 给每个路由传递一个name参数
+  to.query.name = to.name
+  
+  next()
+})
 new Vue({
   el: '#app',
   store,

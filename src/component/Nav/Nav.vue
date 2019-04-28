@@ -8,7 +8,8 @@
           :key="item.id"
           :class="{current: item.isActive}"
         >
-          <router-link :to="item.url">{{item.name}}</router-link>
+          <!-- 如果url是首页 不需要传id过去 -->
+          <router-link :to="{path:item.url+`${item.url==='/home'?'':'/'+item.id}`}">{{item.name}}</router-link>
           <router-link
             class="child"
             v-for="child in item.children"
@@ -24,32 +25,24 @@
   </div>
 </template>
 <script>
-import { treeToList } from "@/utils/"
+import { treeToList } from '@/utils/'
 export default {
   data() {
     return {
-      menus: [
-        // { id: 1, name: "网站首页", url: "/home", isActive: true },
-        // { id: 2, name: "新闻科普", url: "/news", isActive: false },
-        // { id: 3, name: "学术研究", url: "/xueshu", isActive: false },
-        // { id: 4, name: "生物技术", url: "/shengwu", isActive: false },
-        // { id: 5, name: "编程技术", url: "/biancheng", isActive: false },
-        // { id: 6, name: "安全运维", url: "/anquan", isActive: false },
-        // { id: 7, name: "关于", url: "/about" }
-      ]
-    };
+      menus: []
+    }
   },
   methods: {
     active(url) {
-      let lis = this.menus;
+      let lis = this.menus
       lis.map(item => {
         if (item.url === url) {
-          item.isActive = true;
+          item.isActive = true
         } else {
-          item.isActive = false;
+          item.isActive = false
         }
-      });
-      this.menus = lis;
+      })
+      this.menus = lis
     },
     async getCategory() {
       if (this.$store.state.category.length === 0) {
@@ -61,20 +54,19 @@ export default {
         if (item.url === '/home') {
           item.isActive = true
         }
-      });
+      })
       // cate = cate.filter(item=>item.isNav===0)//过滤掉是nav导航的分类
       // this.menus = treeToList(cate)
-      
+
       this.menus = cate
       //放到这的原因是为了刷新的时候也能根据浏览器url高亮对应菜单
-      this.active(this.$route.path);
-    },
+      this.active(this.$route.path)
+    }
   },
   mounted() {
-    console.log(this.$route.path);
     this.getCategory()
   }
-};
+}
 </script>
 <style lang="less" scoped>
 .nav {

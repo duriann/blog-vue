@@ -3,15 +3,21 @@
     <div class="title">
       <i class="iconfont icon-fenlei"></i>
       <span>分类:</span>
-      <span>种业风云</span>
+      <span>{{name}}</span>
       <i class="iconfont icon-wifi"></i>
     </div>
-    <p class="ins">关注蔬菜发展</p>
+    <p class="ins">{{name}}</p>
   </div>
 </template>
 <script>
+import { caseCategoryEnToCh } from '@/utils/'
 export default {
-
+  props: ['cname'],
+  computed: {
+    name() {
+      return caseCategoryEnToCh(this.cname)
+    }
+  }
 }
 </script>
 <style lang="less" scoped>

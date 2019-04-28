@@ -14,7 +14,19 @@ let treeToList = (tree) => {
   return out;
 }
 
+let caseCategoryEnToCh = (ename) => {
+  switch(ename){
+    case 'backend':
+      return '后台开发'
+    case 'frontend':
+      return '前端开发'
+    case 'suixiang':
+      return '随想'
+    default: return  ename  
+  }
+}
 export {
-  treeToList
+  treeToList,
+  caseCategoryEnToCh
 }
 

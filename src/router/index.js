@@ -29,9 +29,10 @@ export default new Router({
                     component: Home
                 },
                 {
-                    path: '/frontend',
+                    path: '/frontend/:id',
                     name: 'frontend',
-                    component: FrontEnd
+                    component: FrontEnd,
+                    props: true
                 },
                 {
                     path: '/about',
