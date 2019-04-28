@@ -3,7 +3,14 @@ import Router from 'vue-router'
 
 import Home from '../pages/Home/Home'
 import FrontEnd from '../pages/FrontEnd/FrontEnd'
-import About from '../pages/About/About'
+import FEVue from '../pages/FrontEnd/Vue/FEVue'
+import React from '../pages/FrontEnd/React/React'
+
+
+import BackEnd from '../pages/BackEnd/BackEnd'
+import Java from '../pages/BackEnd/Java/Java'
+import ThinkAbout from '../pages/ThinkAbout/ThinkAbout'
+
 import Index from '../pages/Index/Index'
 import Admin from '../pages/Admin/Admin'
 
@@ -35,9 +42,34 @@ export default new Router({
                     props: true
                 },
                 {
-                    path: '/about',
-                    name: 'about',
-                    component: About
+                    path: '/frontend/vue/:id',
+                    name: 'FEVue',
+                    component: FEVue,
+                    props: true
+                },
+                {
+                    path: '/frontend/react/:id',
+                    name: 'react',
+                    component: React,
+                    props: true
+                },
+                {
+                    path: '/backend/:id',
+                    name: 'backend',
+                    component: BackEnd,
+                    props: true
+                },
+                {
+                    path: '/backend/java/:id',
+                    name: 'java',
+                    component: Java,
+                    props: true
+                },
+                {
+                    path: '/thinkabout/:id',
+                    name: 'thinkabout',
+                    component: ThinkAbout,
+                    props: true
                 },
                 {
                     path: '/archives/:id',

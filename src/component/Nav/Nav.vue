@@ -13,7 +13,7 @@
           <router-link
             class="child"
             v-for="child in item.children"
-            :to="child.url"
+            :to="item.url +child.url + '/' +child.id"
             :key="child.id"
           >{{child.name}}</router-link>
         </li>
@@ -36,7 +36,8 @@ export default {
     active(url) {
       let lis = this.menus
       lis.map(item => {
-        if (item.url === url) {
+        console.log('url', url, 'item.url', item.url)
+        if (url.includes(item.url)) {
           item.isActive = true
         } else {
           item.isActive = false
@@ -53,6 +54,8 @@ export default {
       cate.forEach(item => {
         if (item.url === '/home') {
           item.isActive = true
+        } else {
+          item.isActive = false
         }
       })
       // cate = cate.filter(item=>item.isNav===0)//过滤掉是nav导航的分类

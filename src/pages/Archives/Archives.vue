@@ -1,4 +1,5 @@
 <template>
+  <!-- 文章组件 -->
   <div class="common">
     <div class="left">
       <Card type="Archive"></Card>

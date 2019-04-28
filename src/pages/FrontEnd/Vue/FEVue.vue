@@ -11,7 +11,7 @@
   </div>
 </template>
 <script>
-import Common from '../Common/Common'
+import Common from '../../Common/Common'
 export default {
   props: ['id'],
   data() {
@@ -31,7 +31,7 @@ export default {
           keyword: this.keyword,
           currPage,
           pageSize: this.pageSize,
-          parentId: this.id
+          categoryId: this.id
         }
       })
       const { data, code } = res.data

@@ -31,11 +31,11 @@ export default {
           keyword: this.keyword,
           currPage,
           pageSize: this.pageSize,
-          parentId: this.id
+          categoryId: this.id
         }
       })
       const { data, code } = res.data
-      console.log('fontEnd data', res.data)
+      console.log('think data', res.data)
       if (code === 0) {
         this.currPage += 1
         this.totalCount = data.totalCount
