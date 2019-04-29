@@ -66,8 +66,16 @@ export default {
       this.active(this.$route.path)
     }
   },
+  watch: {
+    //监听路由的改变 为了右边的分类点击的时候 菜单也能高亮
+    '$route.path'(newVal, oldVal) {
+      // console.log('Nav watch', newVal)
+      this.active(newVal)
+    }
+  },
   mounted() {
     this.getCategory()
+    console.log(this.$route.path)
   }
 }
 </script>

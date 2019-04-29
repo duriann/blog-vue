@@ -3,7 +3,23 @@
     <h2 class="title">{{title}}</h2>
     <ul class="items">
       <li v-for="item in data" :key="item.id" :class="mark">
-        <span>{{item.name || item.title}}</span>
+        <!-- <router-link v-if="item.level === 0" :to="{path:item.url+`${item.url==='/home'?'':'/'+item.id}`}">
+          <span>{{item.name || item.title}}</span>
+        </router-link>
+        <router-link v-if="item.level === 1" :to="{path:item.url+`${item.url==='/home'?'':'/'+item.id}`}">
+          <span>{{item.name || item.title}}</span>
+        </router-link>-->
+
+        <!-- 如果url是首页 不需要传id过去 -->
+        <router-link
+          :to="{path:item.url+`${item.url==='/home'?'':'/'+item.id}`}"
+        >{{item.name || item.title}}</router-link>
+        <router-link
+          class="child"
+          v-for="child in item.children"
+          :to="item.url +child.url + '/' +child.id"
+          :key="child.id"
+        >{{child.name || item.title}}</router-link>
         <span class="time">{{item.createTime}}</span>
         <!--当mark为article的时候 要显示时间-->
       </li>
@@ -27,8 +43,8 @@ export default {
       } else {
       }
       let cate = JSON.parse(JSON.stringify(this.$store.state.category))
-      cate = cate.filter(item=>item.isNav===0)//过滤掉是nav导航的分类
-      this.data = treeToList(cate)
+      cate = cate.filter(item => item.isNav === 0) //过滤掉是nav导航的分类
+      this.data = cate
     },
     async getRecentArticle() {
       let res = await this.$http.get('/article/getRecent')
@@ -73,6 +89,9 @@ export default {
   flex-wrap: wrap;
   justify-content: space-between;
   color: #00a67c;
+  a {
+    color: #00a67c;
+  }
   li {
     width: 50%;
     // height: 30px;

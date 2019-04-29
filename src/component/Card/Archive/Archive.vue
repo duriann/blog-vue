@@ -28,7 +28,7 @@
   </div>
 </template>
 <script>
-import Comment from '../../comment/Comment'
+import Comment from '../../Comment/Comment'
 
 export default {
   components: {
