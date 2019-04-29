@@ -2,7 +2,7 @@
     "plugins": [
       "@babel/plugin-transform-runtime",
       "@babel/plugin-syntax-dynamic-import",
-      // [ 当使用cdn的时候 这边不需要设置按需引入
+      // [ //当使用cdn的时候 这边不需要设置按需引入
       //   "component",
       //   {
       //     "libraryName": "element-ui",

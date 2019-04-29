@@ -11,7 +11,7 @@
       <span>{{username}}</span>
       <span @click="logout" class="test">退出</span>
     </span>
-    <Login v-if="isShowLogin" @setUser="setUser"></Login>
+    <Login v-if="isShowLogin" @setuser="setuser"></Login>
   </div>
 </template>
 <script>
@@ -43,9 +43,10 @@ export default {
         })
       } catch (e) {}
     },
-    setUser(username) {
+    setuser(username) {
       if (!username) {
         let user = JSON.parse(localStorage.getItem('user'))
+        console.log('user', user)
         if (user) {
           return (this.username = user.name)
         }
@@ -60,7 +61,7 @@ export default {
     }
   },
   mounted() {
-    this.setUser()
+    this.setuser()
   }
 }
 </script>

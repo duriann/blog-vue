@@ -82,8 +82,8 @@ export default {
           type: 'success'
         })
 
+        this.$emit('setuser', data.name)
         this.hideLoginModal()
-        this.$emit('setUser', data.name)
         localStorage.setItem('user', JSON.stringify(data))
       } catch (e) {
         this.$message({
@@ -98,18 +98,18 @@ export default {
       this.$destroy()
       this.$store.commit('hideLogin')
     },
-    bindKeyDown(e){
-    if (e.keyCode === 13) {
+    bindKeyDown(e) {
+      if (e.keyCode === 13) {
         //回车
         this.login('ruleForm')
       }
     }
   },
   mounted() {
-    window.addEventListener('keydown',this.bindKeyDown)
+    window.addEventListener('keydown', this.bindKeyDown)
   },
   destroyed() {
-    window.removeEventListener('keydown',this.bindKeyDown)
+    window.removeEventListener('keydown', this.bindKeyDown)
   }
 }
 </script>

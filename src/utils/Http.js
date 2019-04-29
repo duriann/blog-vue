@@ -2,7 +2,8 @@
 import axios from 'axios'
 import moment from 'moment'
 
-// axios.defaults.baseURL = 'http://127.0.0.1:9999/api'
+axios.defaults.baseURL = process.env.NODE_ENV==='production' ? '' : 'http://127.0.0.1:9999/api'
+
 
 axios.interceptors.request.use(config=> {
   return config;

@@ -51,7 +51,9 @@
 
 import { quillEditor, Quill } from 'vue-quill-editor'
 
-import { ImageDrop } from 'quill-image-drop-module'
+//这边因为使用了webpack4的uglifyjs-webpack-plugin 压缩js啥的 导致这边不能用 需要从node_modules中拷贝一份出来本地引入
+// import { ImageDrop } from 'quill-image-drop-module'
+import ImageDrop from './ImageDrop'
 
 import ImageResize from 'quill-image-resize-module'
 
@@ -160,8 +162,10 @@ export default {
       if (this.$store.state.category.length === 0) {
         this.$store.dispatch('getCategory')
       }
-      
-      this.categories = this.getTreeData(this.$store.state.category.filter(item=>item.isNav===0))
+
+      this.categories = this.getTreeData(
+        this.$store.state.category.filter(item => item.isNav === 0)
+      )
     },
     getTreeData(data) {
       // 循环遍历json数据
