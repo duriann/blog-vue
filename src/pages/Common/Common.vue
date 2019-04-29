@@ -11,7 +11,7 @@
         <Card type="Widget" mark="article"></Card>
       </div>
     </div>
-    <el-col>
+    <el-col  v-if="data.length">
       <el-pagination
         layout="prev, pager, next"
         :total="totalCount"
