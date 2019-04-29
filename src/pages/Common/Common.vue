@@ -25,15 +25,61 @@
 import Card from '@/component/Card/Card'
 import Social from '@/component/Social/Social'
 export default {
-  props: ['type', 'data', 'cname', 'totalCount', 'pageSize'], //cname 如果该common组件需要用到Category组件的话  就需要传这个过去
+  // props: ['type', 'data', 'cname', 'totalCount', 'pageSize'], //cname
+
+  props: {
+    type: {
+      //是否需要Category组件 需要就传一个type="Category"
+      type: String,
+      required: false
+    },
+    cname: {
+      //如果该common组件需要用到Category组件的话  就需要传这个过去
+      type: String,
+      required: false
+    },
+    id: {
+      //分类id
+      type: Number,
+      required: false
+    },
+    isParent: {
+      // 是否是顶级菜单节点 与id一起传的
+      type: Boolean,
+      required: false
+    }
+  },
   data() {
     return {
-      category: null //卡片类型
+      category: null, //卡片类型,
+
+      currPage: 1,
+      pageSize: 10,
+      totalCount: 0,
+      keyword: '',
+      data: []
     }
   },
   methods: {
     pageHandle(currPage) {
-      this.$emit('getCommonData', currPage)
+      this.getArticles(currPage)
+    },
+    async getArticles(currPage = 1) {
+      const res = await this.$http.get('/article/listByPage', {
+        params: {
+          keyword: this.keyword,
+          currPage,
+          pageSize: this.pageSize,
+          parentId: this.isParent ? this.id : null,
+          categoryId: this.isParent ? null : this.id
+        }
+      })
+      const { data, code } = res.data
+      if (code === 0) {
+        this.currPage += 1
+        this.totalCount = data.totalCount
+        this.data = data.pages
+      }
     }
   },
   computed: {
@@ -41,7 +87,7 @@ export default {
       return () => import(`@/component/Card/${this.type}/${this.type}`)
     }
   },
-  mounted() {
+  async mounted() {
     this.loader()
       .then(() => {
         this.category = () => this.loader()
@@ -49,7 +95,10 @@ export default {
       .catch(() => {
         // console.error('no type')
       })
+    await this.getArticles()
+    console.log('totalCount', this.totalCount)
   },
+  watch() {},
   components: {
     Card,
     Social
