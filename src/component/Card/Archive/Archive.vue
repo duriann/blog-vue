@@ -64,6 +64,12 @@ export default {
       }
     }
   },
+  watch: {
+    //解决连续点击右侧文章不渲染问题
+    '$route.path'(newVal) {
+      this.getArticle()
+    }
+  },
   mounted() {
     this.getArticle()
   }

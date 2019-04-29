@@ -10,16 +10,21 @@
           <span>{{item.name || item.title}}</span>
         </router-link>-->
 
-        <!-- 如果url是首页 不需要传id过去 -->
+        <!-- 如果url是首页 不需要传id过去  v-if判断的是  如果有url 说明那个是分类。。。 没有就是文章-->
         <router-link
+          v-if="item.url"
           :to="{path:item.url+`${item.url==='/home'?'':'/'+item.id}`}"
         >{{item.name || item.title}}</router-link>
+
+        <router-link v-else :to="{path:`/archives/${item.id}`}">{{item.name || item.title}}</router-link>
+
         <router-link
           class="child"
           v-for="child in item.children"
           :to="item.url +child.url + '/' +child.id"
           :key="child.id"
         >{{child.name || item.title}}</router-link>
+
         <span class="time">{{item.createTime}}</span>
         <!--当mark为article的时候 要显示时间-->
       </li>

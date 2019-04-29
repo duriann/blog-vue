@@ -36,7 +36,6 @@ export default {
     active(url) {
       let lis = this.menus
       lis.map(item => {
-        console.log('url', url, 'item.url', item.url)
         if (url.includes(item.url)) {
           item.isActive = true
         } else {
@@ -75,7 +74,6 @@ export default {
   },
   mounted() {
     this.getCategory()
-    console.log(this.$route.path)
   }
 }
 </script>
