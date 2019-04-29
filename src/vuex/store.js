@@ -17,7 +17,6 @@ const store = new Vuex.Store({
             state.isShowLogin = false;
         },
         getCategory(state,payload){
-            console.log('payload,',payload)
             state.category = payload.data
         }
     },  
@@ -26,7 +25,6 @@ const store = new Vuex.Store({
             const res = await http.get("/category/list");
             const { code } = res.data;
             if (code === 0) {
-                console.log('res.data', res.data);
                commit('getCategory',res.data)
             }
         

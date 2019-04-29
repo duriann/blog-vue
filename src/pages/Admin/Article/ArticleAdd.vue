@@ -158,11 +158,12 @@ export default {
       this.quillUpdateImg = false
       this.$message.error('图片插入失败')
     },
-    getCategory() {
+    async getCategory() {
       if (this.$store.state.category.length === 0) {
-        this.$store.dispatch('getCategory')
+        await this.$store.dispatch('getCategory')
       }
 
+      console.log('this.$store.state.category', this.$store.state.category)
       this.categories = this.getTreeData(
         this.$store.state.category.filter(item => item.isNav === 0)
       )
