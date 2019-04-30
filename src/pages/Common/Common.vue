@@ -4,7 +4,7 @@
       <component :is="category" :cname="cname"></component>
       <Card type="Article" v-for="item in data" :key="item.id" :detail="item"></Card>
     </div>
-    <el-col>
+    <el-col  v-if="data.length">
       <el-pagination
         layout="prev, pager, next"
         :total="totalCount"
