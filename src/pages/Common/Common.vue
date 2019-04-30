@@ -1,15 +1,8 @@
 <template>
   <div class="common">
     <div class="main">
-      <div class="left">
-        <component :is="category" :cname="cname"></component>
-        <Card type="Article" v-for="item in data" :key="item.id" :detail="item"></Card>
-      </div>
-      <div class="right">
-        <Social></Social>
-        <Card type="Widget" mark="category"></Card>
-        <Card type="Widget" mark="article"></Card>
-      </div>
+      <component :is="category" :cname="cname"></component>
+      <Card type="Article" v-for="item in data" :key="item.id" :detail="item"></Card>
     </div>
     <el-col>
       <el-pagination
@@ -106,23 +99,4 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-.common .main {
-  justify-content: space-between;
-  display: flex;
-  .left {
-    flex: 1;
-    .article {
-      margin-bottom: 10px;
-    }
-  }
-  .right {
-    margin-left: 10px;
-    .social {
-      margin-bottom: 10px;
-    }
-    .widget {
-      margin-bottom: 10px;
-    }
-  }
-}
 </style>

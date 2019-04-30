@@ -4,11 +4,11 @@
     <div class="left">
       <Card type="Archive"></Card>
     </div>
-    <div class="right">
+    <!-- <div class="right">
       <Social></Social>
       <Card type="Widget" mark="category"></Card>
       <Card type="Widget" mark="article"></Card>
-    </div>
+    </div>-->
   </div>
 </template>
 <script>
