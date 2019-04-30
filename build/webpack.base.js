@@ -33,7 +33,7 @@ module.exports = {
                 test: /\.(css|less)$/,
                 use: [
                     process.env.NODE_ENV !== 'production'? 'vue-style-loader' : MiniCssExtractPlugin.loader,
-                    'css-loader','less-loader']
+                    'css-loader','postcss-loader','less-loader']
             },
             {
                 test: /\.js$/,

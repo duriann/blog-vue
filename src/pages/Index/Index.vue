@@ -2,16 +2,19 @@
   <div class="index">
     <Header></Header>
     <Nav></Nav>
-    <Tip class="tip"></Tip>
 
     <div class="content">
-      <div class="left">
-        <router-view></router-view>
-      </div>
-      <div class="right">
-        <Social></Social>
-        <Card type="Widget" mark="category"></Card>
-        <Card type="Widget" mark="article"></Card>
+      <Tip class="tip"></Tip>
+
+      <div class="wrap">
+        <div class="left">
+          <router-view></router-view>
+        </div>
+        <div class="right">
+          <Social></Social>
+          <Card type="Widget" mark="category"></Card>
+          <Card type="Widget" mark="article"></Card>
+        </div>
       </div>
     </div>
     <ToTop></ToTop>
@@ -46,8 +49,10 @@ export default {
   max-width: 1226px;
   margin: 0 auto;
   margin-bottom: 10px;
-  display: flex;
-  justify-content: space-between;
+  .wrap {
+    display: flex;
+    justify-content: space-between;
+  }
   .left {
     flex: 1;
     .article {
