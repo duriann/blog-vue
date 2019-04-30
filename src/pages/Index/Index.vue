@@ -46,6 +46,7 @@ export default {
 </script>
 <style lang="less" scoped>
 .content {
+  padding: 0 20px;
   max-width: 1226px;
   margin: 0 auto;
   margin-bottom: 10px;

@@ -50,6 +50,10 @@ table {
 /* 自定义 */
 html,body{
 	height: 100%;
+	-webkit-tap-highlight-color: transparent;
+	-webkit-user-select: none;
+	-moz-user-focus: none;
+	-moz-user-select: none;
 }
 body{
 	font-family: "Microsoft Yahei","Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -61,4 +65,114 @@ body{
 a{
 	display: block;
 	text-decoration: none;
+}
+
+/* 当小于500以后不生效 用户nav选中高亮以及hover高亮 */
+@media screen and (min-width: 500px) {
+	.index .nav ul li.current{
+		background-color: #16a085;
+	}
+	.index .nav ul li:hover .child{
+		background-color: #16a085;
+		display: block;
+	}
+	.index .nav ul li:hover{
+		background-color: #16a085;
+	}
+	.index .nav ul li .child:hover{
+		background-color: #4a4a4a;
+	}
+}
+
+@media screen and (max-width: 850px) {
+	.index .content .right{
+		display: none;
+	}
+}
+@media screen and (max-width: 768px) {
+	.index .content .tip{
+		display: none;
+	}
+	.index .nav .search{
+		display: none;
+	}
+}
+@media screen and (max-width: 635px) {
+	.index .header {
+		height: 54px !important;
+	}
+	.index .header .title{
+		font-size: 24px !important;
+	}
+	.index .header .ins{
+		font-size: 20px !important;
+	}
+	.index .content{
+		padding:0 !important;
+	}
+}
+@media screen and (max-width: 500px) {
+	.index .header {
+		display: none !important;
+	}
+	.index .nav .wrapper{
+		display: block !important;
+	}
+	.index .nav ul{
+		display: block !important;
+		position: relative;
+		z-index: 999;
+	}
+	.index .nav ul li.restitle{
+		display: block;
+		height: 100%;
+		font-size: 18px;
+	}
+	.index .nav ul li{
+		background-color: #16a085;
+		width: 100%;
+	}
+	
+	.index .nav ul li a{
+		box-sizing: border-box;
+		text-align: left !important;
+		padding-left: 10px;
+	}
+	.index .nav ul li:not(:first-child) {
+		display:none;
+		background-color: #4a4a4a;
+	}
+	.index .nav ul li:hover{
+		background-color: #16a085;
+	}
+	.index .nav ul li.cate{
+		width: 50px;
+		background-color: #16a085;
+	}
+	.index .nav ul.responsive li{
+		display: block;
+	}
+	.index .nav .wrapper .cate{
+		display: block !important;
+	}
+	.index .nav .wrapper{
+		padding: 0 !important;
+	}
+	.index .header .ins{
+		display: none;
+	}
+	.index .article .content .headimg{
+		/* 
+		想了想 都这么小的屏幕了还是不显示图片了。。
+		width: 100px !important;
+		height: 100px !important; */
+		display: none;
+	}
+	.index .article .content .ins{
+		display: none !important;
+	}
+	.index .article .content .summary .summary-ins{
+		height: 100px !important;
+		-webkit-line-clamp: 5 !important;
+	}
 }

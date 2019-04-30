@@ -1,7 +1,10 @@
 <template>
   <div class="nav">
     <div class="wrapper">
-      <ul>
+      <ul ref="ulmenu">
+        <li class="restitle">
+          <a href="#">菠萝君,沉迷于开饭店的程序猿</a>
+        </li>
         <li
           @click="active(item.url)"
           v-for="item in menus"
@@ -16,6 +19,9 @@
             :to="item.url +child.url + '/' +child.id"
             :key="child.id"
           >{{child.name}}</router-link>
+        </li>
+        <li class="cate" @click="toggleMenu">
+          <i class="iconfont icon-fenlei"></i>
         </li>
       </ul>
       <div class="search">
@@ -33,7 +39,15 @@ export default {
     }
   },
   methods: {
+    toggleMenu() {
+      //在小屏的时候 点击添加类 实现menu显示和影藏
+      this.$refs.ulmenu.classList.toggle('responsive')
+    },
+    hideMenu() {
+      this.$refs.ulmenu && this.$refs.ulmenu.classList.remove('responsive')
+    },
     active(url) {
+      this.hideMenu()
       let lis = this.menus
       lis.map(item => {
         if (url.includes(item.url)) {
@@ -80,6 +94,7 @@ export default {
 <style lang="less" scoped>
 .nav {
   .wrapper {
+    padding: 0 20px;
     max-width: 1226px;
     margin: 0 auto;
     display: flex;
@@ -105,6 +120,22 @@ export default {
       font-size: 20px;
     }
   }
+  .restitle {
+    display: none;
+  }
+  .cate {
+    color: #fff;
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    i {
+      display: block;
+      text-align: center;
+      line-height: 52px;
+      font-size: 20px;
+    }
+  }
   li {
     margin-right: 1px;
     font-size: 16px;
@@ -114,24 +145,25 @@ export default {
     align-items: center;
     cursor: pointer;
     flex-direction: column;
-    &.current {
-      background-color: #16a085;
-    }
-    &:hover .child {
-      background-color: #16a085;
-      display: block;
-    }
-    &:hover {
-      background-color: #16a085;
-    }
+    // &.current {
+    //   background-color: #16a085;
+    // }
+    // &:hover .child {
+    //   background-color: #16a085;
+    //   display: block;
+    // }
+    // &:hover {
+    //   background-color: #16a085;
+    // }
     .child {
       display: none;
-      &:hover {
-        background-color: #4a4a4a;
-      }
+      // &:hover {
+      //   background-color: #4a4a4a;
+      // }
     }
   }
   a {
+    transition: 0.3s;
     width: 100%;
     line-height: 52px;
     text-align: center;
