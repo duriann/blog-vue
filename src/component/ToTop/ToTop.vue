@@ -12,7 +12,7 @@ export default {
   },
   methods: {
     goTop() {
-      this.scrollTo(document.documentElement, 0, 300)
+      this.scrollTo(document.documentElement || document.body, 0, 300)
     },
     handle() {
       let { toTop } = this.$refs
@@ -20,8 +20,8 @@ export default {
         document.documentElement.scrollTop ||
         document.body.scrollTop ||
         window.pageYOffset
-        if(toTop){
-          if (scrollTop > 200) {
+      if (toTop) {
+        if (scrollTop > 200) {
           toTop.style.display = 'block'
         } else {
           toTop.style.display = 'none'
