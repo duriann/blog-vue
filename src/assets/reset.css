@@ -152,6 +152,9 @@ a{
 	.index .nav ul.responsive li{
 		display: block;
 	}
+	.index .nav ul li.current{
+		background-color: #16a085;
+	}
 	.index .nav .wrapper .cate{
 		display: block !important;
 	}

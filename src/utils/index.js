@@ -19,8 +19,8 @@ let caseCategoryEnToCh = (ename) => {
       return '后台开发'
     case 'frontend':
       return '前端开发'
-    case 'suixiang':
-      return '随想'
+    case 'thinkabout':
+      return '个人随想'
     default: return  ename  
   }
 }
