@@ -4,19 +4,22 @@
       <component :is="category" :cname="cname"></component>
       <Card type="Article" v-for="item in data" :key="item.id" :detail="item"></Card>
     </div>
-    <el-col  v-if="data.length">
+    <!-- <el-col v-if="data.length">
       <el-pagination
         layout="prev, pager, next"
         :total="totalCount"
         :page-size="pageSize"
         @current-change="pageHandle"
       ></el-pagination>
-    </el-col>
+    </el-col>-->
+    <Pagination :totalCount="totalCount" :pageSize="pageSize" @current-change="pageHandle"></Pagination>
   </div>
 </template>
 <script>
 import Card from '@/component/Card/Card'
 import Social from '@/component/Social/Social'
+import Pagination from '@/component/Pagination/Pagination'
+
 export default {
   // props: ['type', 'data', 'cname', 'totalCount', 'pageSize'], //cname
 
@@ -47,7 +50,7 @@ export default {
       category: null, //卡片类型,
 
       currPage: 1,
-      pageSize: 10,
+      pageSize: 1,
       totalCount: 0,
       keyword: '',
       data: []
@@ -94,7 +97,8 @@ export default {
   watch() {},
   components: {
     Card,
-    Social
+    Social,
+    Pagination
   }
 }
 </script>

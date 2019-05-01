@@ -66,6 +66,12 @@ a{
 	display: block;
 	text-decoration: none;
 }
+button{
+	border: 1px solid transparent;
+	outline: none;
+	margin: 0;
+	padding: 0;
+}
 
 /* 当小于500以后不生效 用户nav选中高亮以及hover高亮 */
 @media screen and (min-width: 500px) {

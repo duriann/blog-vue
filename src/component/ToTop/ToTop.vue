@@ -12,7 +12,10 @@ export default {
   },
   methods: {
     goTop() {
-      this.scrollTo(document.documentElement || document.body, 0, 300)
+      let element = document.documentElement.scrollTop
+        ? document.documentElement
+        : document.body
+      this.scrollTo(element, 0, 300)
     },
     handle() {
       let { toTop } = this.$refs
@@ -61,13 +64,13 @@ export default {
 .to-top {
   display: none;
   button {
-    outline: none;
     cursor: pointer;
     width: 36px;
     height: 36px;
     text-align: center;
     background-color: #11a99b;
     color: #fff;
+    border-radius: 3px;
     i {
       font-size: 20px;
     }

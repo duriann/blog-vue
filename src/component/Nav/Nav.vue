@@ -163,7 +163,7 @@ export default {
     }
   }
   a {
-    transition: 0.3s;
+    // transition: 0.3s;
     width: 100%;
     line-height: 52px;
     text-align: center;
