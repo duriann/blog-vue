@@ -50,7 +50,7 @@ export default {
       category: null, //卡片类型,
 
       currPage: 1,
-      pageSize: 1,
+      pageSize: 6,
       totalCount: 0,
       keyword: '',
       data: []
