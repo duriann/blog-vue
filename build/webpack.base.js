@@ -8,6 +8,11 @@ function resolve (dir) {
 }
 module.exports = {
     entry: ('./src/main.js'),
+    // 表示在引入静态资源时，从根路径开始引入
+	output: {
+        // 表示在引入静态资源时，从根路径开始引入
+        publicPath: '/'
+    },
     resolve: {
         extensions: ['.js','.vue','.json'],
         alias: {

@@ -19,7 +19,7 @@
           :on-error="uploadError"
           :before-upload="beforeUpload"
         ></el-upload>
-        <quill-editor v-model="content" ref="myQuillEditor" :options="editorOption"></quill-editor>
+        <quill-editor @change="onEditorChange($event)" ref="myQuillEditor" :options="editorOption"></quill-editor>
       </el-col>
     </el-row>
 
@@ -42,13 +42,15 @@
         <el-button size="small">取消</el-button>
       </el-col>
     </el-row>
+
+    <code class="ql-editor" v-html="content"></code>
   </div>
 </template>
 
 <script>
 // import 'quill/dist/quill.core.css'
 // import 'quill/dist/quill.snow.css'
-
+import hljs from 'highlight.js'
 import { quillEditor, Quill } from 'vue-quill-editor'
 
 //这边因为使用了webpack4的uglifyjs-webpack-plugin 压缩js啥的 导致这边不能用 需要从node_modules中拷贝一份出来本地引入
@@ -107,6 +109,11 @@ export default {
               }
             }
           },
+          syntax: {
+            highlight: text => {
+              return hljs.highlightAuto(text).value // 这里就是代码高亮需要配置的地方
+            }
+          },
           imageDrop: true,
           imageResize: {
             displayStyles: {
@@ -125,6 +132,10 @@ export default {
   },
 
   methods: {
+    onEditorChange(e) {
+      this.content = e.html
+      console.log('this,content', this.content)
+    },
     // 上传图片前
     beforeUpload(res, file) {
       // 显示loading动画
@@ -169,9 +180,10 @@ export default {
       )
     },
     getTreeData(data) {
+      console.log('getTreeData', data)
       // 循环遍历json数据
       for (var i = 0; i < data.length; i++) {
-        if (data[i].children.length < 1) {
+        if (data[i].children === undefined || data[i].children.length < 1) {
           // children若为空数组，则将children设为undefined
           data[i].children = undefined
         } else {
@@ -183,7 +195,6 @@ export default {
     },
     //添加文章
     async addActicle() {
-      console.log('add')
       const res = await this.$http.post('/article/add', {
         title: this.title,
         content: this.content,

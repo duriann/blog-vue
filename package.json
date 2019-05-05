@@ -51,6 +51,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "highlight.js": "^9.15.6",
     "jsencrypt": "^3.0.0-rc.1",
     "quill-image-drop-module": "^1.0.3",
     "quill-image-resize-module": "^3.0.0",

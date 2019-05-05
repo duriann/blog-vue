@@ -4,7 +4,7 @@ import App from './App.vue'
 import router from './router/index'
 
 import ElementUI from 'element-ui'
-
+import 'highlight.js/styles/xcode.css'
 import './assets/reset.css'
 import './assets/fonts/iconfont.css'
 // import 'element-ui/lib/theme-chalk/index.css'; 使用cdn的时候不需要导入样式
@@ -16,7 +16,6 @@ Vue.use(Vuex)
 Vue.prototype.$http = http
 
 router.beforeEach((to, from, next) => {
-  // 给每个路由传递一个name参数
   to.params.name = to.name
   
   next()

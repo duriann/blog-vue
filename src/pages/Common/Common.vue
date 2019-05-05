@@ -12,7 +12,12 @@
         @current-change="pageHandle"
       ></el-pagination>
     </el-col>-->
-    <Pagination :totalCount="totalCount" :pageSize="pageSize" @current-change="pageHandle"></Pagination>
+    <Pagination
+      v-if="data.length"
+      :totalCount="totalCount"
+      :pageSize="pageSize"
+      @current-change="pageHandle"
+    ></Pagination>
   </div>
 </template>
 <script>
