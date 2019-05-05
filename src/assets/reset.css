@@ -55,6 +55,15 @@ html,body{
 	-moz-user-focus: none;
 	-moz-user-select: none;
 }
+pre, code { 
+	overflow: auto; 
+	background: #f4f4f4; 
+	white-space:-moz-pre-wrap; /* Mozilla, since 1999 */    
+	white-space:-pre-wrap; /* Opera 4-6 */    
+	white-space:-o-pre-wrap; /* Opera 7 */    
+	word-wrap:break-word; /* Internet Explorer 5.5+ */  
+	white-space: pre-wrap; /* Firefox */ 
+} 
 body{
 	font-family: "Microsoft Yahei","Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 14px;
