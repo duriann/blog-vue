@@ -59,21 +59,23 @@ export default {
       encrypt.setPublicKey(publicKey)
     },
     async login(ruleForm) {
-      await this.getPublicKey()
+      // await this.getPublicKey()
       try {
         //这边使用try-catch以后 可以不必判断validate的返回值，当校验不通过的时候，会自然进到catch代码块中
-        await this.$refs[ruleForm].validate()
-
+        let validate = await this.$refs[ruleForm].validate()
+        //验证过了才获取publicKey
+        await this.getPublicKey()
         const res = await this.$http.post('/user/login', {
           username: this.ruleForm.username,
           password: encrypt.encrypt(this.ruleForm.password)
         })
-        console.log(res)
+        console.log('login res', res)
         const { code, msg, data } = res.data
         if (code === 1) {
           return this.$message({
             message: msg,
-            type: 'error'
+            type: 'error',
+            duration: 3000
           })
         }
 
@@ -82,13 +84,15 @@ export default {
           type: 'success'
         })
 
-        this.$emit('setuser', data.name)
+        this.$emit('setuser', data.user.name)
         this.hideLoginModal()
-        localStorage.setItem('user', JSON.stringify(data))
+        localStorage.setItem('token', JSON.stringify(data.token))
+        localStorage.setItem('user', JSON.stringify(data.user))
       } catch (e) {
         this.$message({
-          message: '用户名或者密码不能为空!',
-          type: 'error'
+          message: '用户名或者密码不符合规则!',
+          type: 'error',
+          duration: 2000
         })
         console.error(e)
       }

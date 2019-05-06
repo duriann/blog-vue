@@ -62,7 +62,7 @@ export default {
       console.log(index, row)
     },
     async getUsers(currPage = 1) {
-      const res = await this.$http.get('/user/listByPage', {
+      const res = await this.$http.get('/admin/user/listByPage', {
         params: {
           keyword: this.keyword,
           currPage,

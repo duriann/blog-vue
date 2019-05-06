@@ -57,11 +57,17 @@ export default {
   },
   methods: {
     async fetchMenuList() {
-      const ret = await this.$http.get(`/adminMenu/list`)
-      console.log(ret)
-      const { code, data } = ret.data
+      const ret = await this.$http.get(`/admin/adminMenu/list`)
+      console.log('admin fetchMenu res', ret)
+      const { code, data, msg } = ret.data
       if (code === 0) {
         this.menuList = data
+      } else if (code === -1) {
+        this.$message({
+          type: 'error',
+          message: msg
+        })
+        this.$router.push('/home')
       }
     },
     logout() {

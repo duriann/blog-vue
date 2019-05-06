@@ -16,17 +16,17 @@
           </span>
         </router-link>
         <span class="iconfont icon-shijian">{{formatDate(article.createTime)}}</span>
-        <router-link to>
+        <a href="#comment">
           <span class="iconfont icon-pinglun">
             <span class="green">{{comments.length}}评论</span>
           </span>
-        </router-link>
+        </a>
       </div>
     </div>
     <div class="content">
       <div v-html="article.content"></div>
     </div>
-    <Comment :comments="comments" :articleId="article.id" @getArticle="getArticle"></Comment>
+    <Comment id="comment" :comments="comments" :articleId="article.id" @getArticle="getArticle"></Comment>
   </div>
 </template>
 <script>
@@ -69,6 +69,7 @@ export default {
       })
       if (res.data.code === 0) {
         this.comments = res.data.data
+        console.log('comments', this.comments)
       }
     },
     formatDate(time) {

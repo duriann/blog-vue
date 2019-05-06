@@ -195,7 +195,7 @@ export default {
     },
     //添加文章
     async addActicle() {
-      const res = await this.$http.post('/article/add', {
+      const res = await this.$http.post('/admin/article/add', {
         title: this.title,
         content: this.content,
         categoryId: this.selectedCategory.slice(
