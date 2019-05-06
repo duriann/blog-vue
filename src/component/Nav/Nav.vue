@@ -3,7 +3,7 @@
     <div class="wrapper">
       <ul ref="ulmenu">
         <li class="restitle">
-          <a href="#">菠萝君,沉迷于开饭店的程序猿</a>
+          <router-link to="/">菠萝君,沉迷于开饭店的程序猿</router-link>
         </li>
         <li
           @click="active(item.url)"

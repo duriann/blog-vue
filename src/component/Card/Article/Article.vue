@@ -25,26 +25,35 @@
             {{detail.author}}
           </span>
           <span>
-            <i class="iconfont icon-shijian"></i>七天前
+            <i class="iconfont icon-shijian"></i>
+            {{formatTime(detail.createTime)}}
           </span>
           <span>
             <i class="iconfont icon-iconset0207"></i>62°C
           </span>
           <span>
-            <i class="iconfont icon-weibiaoti-"></i>1评论
+            <i class="iconfont icon-weibiaoti-"></i>
+            {{detail.totalComment}}评论
           </span>
-          <span>
+          <!-- <span>
             <i class="iconfont icon-icon-test"></i>0喜欢
-          </span>
+          </span>-->
         </p>
       </div>
     </div>
   </div>
 </template>
 <script>
+import { getCreateTime } from '@/utils/'
 export default {
   props: ['detail'],
-  mounted() {}
+  mounted() {},
+  methods: {
+    formatTime(time) {
+      console.log('time', getCreateTime(time))
+      return getCreateTime(time)
+    }
+  }
 }
 </script>
 <style lang="less" scoped>

@@ -1,3 +1,7 @@
+/**
+ * 树状结构扁平化
+ * @param {*} tree 
+ */
 let treeToList = (tree) => {
   var queen = [];
   var out = [];
@@ -13,6 +17,10 @@ let treeToList = (tree) => {
   return out;
 }
 
+/**
+ * 根据路由中传递的英文名转换成中文名
+ * @param {*} ename 
+ */
 let caseCategoryEnToCh = (ename) => {
   switch(ename){
     case 'backend':
@@ -24,8 +32,40 @@ let caseCategoryEnToCh = (ename) => {
     default: return  ename  
   }
 }
-export {
-  treeToList,
-  caseCategoryEnToCh
+
+/**
+ * 根据历史时间戳获取该时间到现在的 中文描述
+ * ex: 
+ * param: 1551716339000 res: 2个月前(03-05)
+ * @param {*} time 
+ */
+let getCreateTime = (time) => {
+  let now = Date.now()
+  let ctime = new Date(time)
+  let month = ctime.getMonth()+1
+  if(month<10){
+    month = '0' + month
+  }
+  let day = ctime.getDate()
+  if(day<10){
+    day = '0' + day
+  }
+  let days = (now-time)/1000/3600/24
+  if(days>=365){
+    return `${Math.floor(days/365)}年前(${month}-${day})`
+  }
+  if(days>=30){
+    return `${Math.floor(days/30)}个月前(${month}-${day})`
+  }
+  if(days>=7){
+    return `${Math.floor(days/7)}周前(${month}-${day})`
+  }else{
+    return `${Math.ceil(days)}天前(${month}-${day})`
+  }
 }
 
+export {
+  treeToList,
+  caseCategoryEnToCh,
+  getCreateTime
+}

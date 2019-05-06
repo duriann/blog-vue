@@ -3,9 +3,11 @@
     <div class="title">
       <h1>{{article.title}}</h1>
       <div class="meta">
-        <router-link to>
+        <router-link
+          :to="category.parentUrl?category.parentUrl+category.url+`/${article.categoryId}`: category&&category.url+`/${article.categoryId}`"
+        >
           <span class="iconfont icon-fenlei">
-            <span class="green">APP</span>
+            <span class="green">{{category.name}}</span>
           </span>
         </router-link>
         <router-link to>
@@ -13,10 +15,10 @@
             <span class="green">{{article.author}}</span>
           </span>
         </router-link>
-        <span class="iconfont icon-shijian">2019-2-3</span>
+        <span class="iconfont icon-shijian">{{formatDate(article.createTime)}}</span>
         <router-link to>
           <span class="iconfont icon-pinglun">
-            <span class="green">2评论</span>
+            <span class="green">{{comments.length}}评论</span>
           </span>
         </router-link>
       </div>
@@ -29,6 +31,7 @@
 </template>
 <script>
 import Comment from '../../Comment/Comment'
+import moment from 'moment'
 
 export default {
   components: {
@@ -37,22 +40,27 @@ export default {
   data() {
     return {
       article: {},
-      comments: []
+      comments: [],
+      category: {}
     }
   },
   methods: {
+    //获取文章
     async getArticle() {
       const res = await this.$http.get('/article/get', {
         params: {
           id: this.$route.params.id
         }
       })
-      console.log('archive', res)
       if (res.data.code === 0) {
         this.article = res.data.data
+        this.category = this.article.category
+        console.log('archive article', this.article)
         this.getComments(res.data.data.id) //当成功获取到文章的时候 再去请求该文章的评论
       }
+      console.log('archive article2', this.article)
     },
+    //获取评论
     async getComments(id) {
       const res = await this.$http.get('/comment/getById', {
         params: {
@@ -62,6 +70,9 @@ export default {
       if (res.data.code === 0) {
         this.comments = res.data.data
       }
+    },
+    formatDate(time) {
+      return moment(time).format('YYYY-MM-DD')
     }
   },
   watch: {
@@ -70,7 +81,7 @@ export default {
       this.getArticle()
     }
   },
-  mounted() {
+  created() {
     this.getArticle()
   }
 }
@@ -80,6 +91,10 @@ export default {
   background-color: #fff;
   height: auto;
   padding: 15px;
+  pre,
+  code {
+    padding: 10px;
+  }
 }
 .title {
   border-bottom: 1px solid #eee;
