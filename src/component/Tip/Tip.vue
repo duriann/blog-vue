@@ -30,18 +30,14 @@ export default {
     login() {
       this.$store.commit('showLogin')
     },
-    async logout() {
-      let user = localStorage.getItem('user')
-      let userObj = JSON.parse(user)
-      try {
-        let res = await this.$http.get(`/user/logout?uid=${userObj.uid}`)
-        localStorage.removeItem('user')
-        this.username = ''
-        this.$message({
-          type: 'success',
-          message: res.data.msg
-        })
-      } catch (e) {}
+    logout() {
+      localStorage.removeItem('user')
+      localStorage.removeItem('token')
+      this.username = ''
+      this.$message({
+        type: 'success',
+        message: '退出成功!'
+      })
     },
     setuser(username) {
       if (!username) {
