@@ -19,20 +19,20 @@
       </el-col>
     </el-row>
     <el-table :data="tableData" style="width: 100%;margin-top: 10px;">
-      <el-table-column label="id" width="60" prop="id"></el-table-column>
-      <el-table-column label="标题" prop="title"></el-table-column>
-      <el-table-column label="作者" width="80" prop="author"></el-table-column>
-      <el-table-column label="评论id" width="60" prop="comment_id"></el-table-column>
-      <el-table-column label="内容" width="180" prop="content" :show-overflow-tooltip="true"></el-table-column>
-      <el-table-column label="分类" width="100" prop="category_id"></el-table-column>
-      <el-table-column label="创建时间" width="100" prop="createTime"></el-table-column>
-      <el-table-column label="更新时间" width="100" prop="updateTime"></el-table-column>
-      <el-table-column label="操作">
+      <el-table-column fixed label="操作" width="150">
         <template slot-scope="scope">
           <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
           <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
         </template>
       </el-table-column>
+      <el-table-column label="id" width="60" prop="id"></el-table-column>
+      <el-table-column label="标题" width="100" prop="title"></el-table-column>
+      <el-table-column label="作者" width="80" prop="author"></el-table-column>
+      <el-table-column label="评论id" width="60" prop="comment_id"></el-table-column>
+      <el-table-column label="内容" width="180" prop="content" :show-overflow-tooltip="true"></el-table-column>
+      <el-table-column label="分类" width="100" prop="category_id"></el-table-column>
+      <el-table-column label="创建时间" prop="createTime"></el-table-column>
+      <el-table-column label="更新时间" prop="updateTime"></el-table-column>
     </el-table>
     <el-col>
       <el-pagination

@@ -16,11 +16,18 @@ axios.interceptors.request.use(config=> {
 });
 
 axios.interceptors.response.use(res => {
-  let {data, code, msg} = res.data
+  let { data } = res.data
   
   if(Array.isArray(data)){
     data.map(item=>{
       item.createTime = item.createTime&&moment(item.createTime).format('YYYY-MM-DD HH:mm:ss')
+    })
+  }
+  if(data&&data.pages){
+    data.pages.map(item=>{
+      item.createTime = item.createTime&&moment(item.createTime).format('YYYY-MM-DD HH:mm:ss')
+      item.updateTime = item.updateTime&&moment(item.updateTime).format('YYYY-MM-DD HH:mm:ss')
+
     })
   }
   return res;

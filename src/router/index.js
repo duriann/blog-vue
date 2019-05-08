@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 const Home = () => import(/* webpackChunkName: 'home' */ '../pages/Home/Home')
+
 const FrontEnd = () => import(/* webpackChunkName: 'FrontEnd' */ '../pages/FrontEnd/FrontEnd')
 const FEVue = () => import(/* webpackChunkName: 'FEVue' */ '../pages/FrontEnd/Vue/FEVue')
 const React = () => import(/* webpackChunkName: 'React' */ '../pages/FrontEnd/React/React')
@@ -12,13 +13,17 @@ const Java = () => import(/* webpackChunkName: 'Java' */ '../pages/BackEnd/Java/
 const ThinkAbout = () => import(/* webpackChunkName: 'ThinkAbout' */ '../pages/ThinkAbout/ThinkAbout')
 
 const Index = () => import(/* webpackChunkName: 'Index' */ '../pages/Index/Index')
-const Admin = () => import(/* webpackChunkName: 'Admin' */ '../pages/Admin/Admin')
+const Archives = () => import(/* webpackChunkName: 'Archives' */ '../pages/Archives/Archives')
 
+
+const Admin = () => import(/* webpackChunkName: 'Admin' */ '../pages/Admin/Admin')
 const User = () => import(/* webpackChunkName: 'User' */ '../pages/Admin/User/User')
 const ArticleAdd = () => import(/* webpackChunkName: 'ArticleAdd' */ '../pages/Admin/Article/ArticleAdd')
 const ArticleList = () => import(/* webpackChunkName: 'ArticleList' */ '../pages/Admin/Article/ArticleList')
-const Archives = () => import(/* webpackChunkName: 'Archives' */ '../pages/Archives/Archives')
+const CategoryList = () => import(/* webpackChunkName: 'Category' */ '../pages/Admin/Category/CategoryList')
 
+
+const Error = () => import(/* webpackChunkName: 'Error' */ '../pages/Error/Error')
 
 Vue.use(Router)
 
@@ -98,8 +103,18 @@ export default new Router({
                     path: '/article/list',
                     name: 'articleList',
                     component: ArticleList
+                },
+                {
+                    path: '/category/list',
+                    name: 'categoryList',
+                    component: CategoryList
                 }
             ]
+        },
+        {
+            path: '*',
+            name: 'error',
+            component: Error
         }
         
     ]

@@ -65,7 +65,7 @@ pre, code {
 	white-space: pre-wrap; /* Firefox */ 
 } 
 body{
-	font-family: "Microsoft Yahei","Helvetica Neue",Helvetica,Arial,sans-serif;
+		font-family: "Arial","Microsoft YaHei","黑体","宋体",sans-serif;
     font-size: 14px;
     line-height: 20px;
     color: #555;
