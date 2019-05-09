@@ -16,7 +16,7 @@ axios.interceptors.request.use(config=> {
 });
 
 axios.interceptors.response.use(res => {
-  let { data } = res.data
+  let { data, code } = res.data
   
   if(Array.isArray(data)){
     data.map(item=>{
@@ -29,6 +29,11 @@ axios.interceptors.response.use(res => {
       item.updateTime = item.updateTime&&moment(item.updateTime).format('YYYY-MM-DD HH:mm:ss')
 
     })
+  }
+  //当token过期的时候 删掉localStorage中的user 和 token
+  if(code === -2){
+    localStorage.removeItem('user')
+    localStorage.removeItem('token')
   }
   return res;
 }, err => {

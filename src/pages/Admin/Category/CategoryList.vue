@@ -58,7 +58,7 @@
           <el-input v-model="addForm.url" autocomplete="off" placeholder="/admin"></el-input>
         </el-form-item>
         <el-form-item label="父级分类" prop="parentId">
-          <el-select v-model="addForm.parentId" placeholder="请选择父级分类">
+          <el-select v-model="addForm.parentId" placeholder="请选择父级分类" @change="parentHanderChange">
             <el-option v-for="pc in parentCategory" :key="pc.id" :label="pc.name" :value="pc.id"></el-option>
           </el-select>
         </el-form-item>
@@ -66,7 +66,11 @@
           <el-input-number v-model="addForm.sort" controls-position="right" :min="1" :max="999"></el-input-number>
         </el-form-item>
         <el-form-item label="是否导航" prop="isNav">
-          <el-select v-model="addForm.isNav" placeholder="请选择">
+          <el-select
+            v-model="addForm.isNav"
+            placeholder="请选择"
+            :disabled="addForm.parentId?true:false"
+          >
             <el-option label="是" value="1"></el-option>
             <el-option label="否" value="0"></el-option>
           </el-select>
@@ -74,7 +78,7 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="addDialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="addCategory('addForm')">确 定</el-button>
+        <el-button type="primary" @click="validate('addForm')">确 定</el-button>
       </div>
     </el-dialog>
   </div>
@@ -103,11 +107,11 @@ export default {
         //表单验证
         name: [
           { required: true, message: '请输入分类名称', trigger: 'blur' },
-          { min: 2, max: 6, message: '长度在 2 到 6 个字符', trigger: 'blur' }
+          { min: 2, max: 10, message: '长度在 2 到 10 个字符', trigger: 'blur' }
         ],
         url: [
           { required: true, message: '请输入分类url', trigger: 'blur' },
-          { min: 2, max: 6, message: '长度在 2 到 6 个字符', trigger: 'blur' }
+          { min: 2, max: 10, message: '长度在 2 到 10 个字符', trigger: 'blur' }
         ],
         isNav: [{ required: true, message: '请选择', trigger: 'change' }],
         parentId: [{ required: false }],
@@ -124,28 +128,73 @@ export default {
     }
   },
   methods: {
-    //添加分类
-    async addCategory(formName) {
+    //当有选择父级分类的时候 导航需要设置为0(非导航) 并且不可修改
+    parentHanderChange(e) {
+      console.log('select parent value', e)
+      //这里加''的原因是  是否导航的option 中的value是字符串类型的 设置成同样类型的以后 elementui会自动将lebel(否)显示在select上 而不是显示数字0
+      this.addForm.isNav = 0 + ''
+    },
+    //表单验证
+    async validate(formName) {
       try {
         await this.$refs[formName].validate()
-        console.log('addForm', this.addForm)
-        let { name, isNav, level, sort, parentId, parentUrl } = this.addForm
+
+        let {
+          name,
+          isNav,
+          url,
+          level,
+          sort,
+          parentId,
+          parentUrl
+        } = this.addForm
         if (parentId) {
           //如果有父级id 需要传父级url 以及修改等级为1
-          parentUrl = this.tableData.filter(item => item.id === parentId)[0].url
-          level = 1
+          this.addForm.parentUrl = this.tableData.filter(
+            item => item.id === parentId
+          )[0].url
+          this.addForm.level = 1
         }
-      } catch (e) {}
+        this.addForm.isNav = isNav - 0 //转行成number类型
+        this.addForm.url = url.startsWith('/') ? url : '/' + url
+        console.log('addForm', this.addForm)
+        this.addCategory(this.addForm)
+      } catch (e) {
+        console.log(e)
+      }
     },
+    //添加分类
+    async addCategory(addForm) {
+      console.log('addCategory', addForm)
+      let res = await this.$http.post('/admin/category/add', {
+        ...addForm
+      })
+      console.log('add category res', res)
+      let { code, msg } = res.data
+      if (code === 0) {
+        this.$message({
+          type: 'success',
+          message: msg
+        })
+      } else {
+        this.$message.error(msg)
+      }
+      this.$refs['addForm'].resetFields() //清空form
+      this.addDialogVisible = false
+    },
+    //分页handle
     pageHandle(currPage) {
       this.getCategorys(currPage)
     },
+    //编辑
     handleEdit(index, row) {
       console.log(index, row)
     },
+    //删除
     handleDelete(index, row) {
       console.log(index, row)
     },
+    //获取所有分类
     async getCategorys(currPage = 1) {
       const res = await this.$http.get('/admin/category/listByPage', {
         params: {
