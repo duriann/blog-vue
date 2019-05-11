@@ -86,7 +86,7 @@ export default {
 
         this.$emit('setuser', data.user.name)
         this.hideLoginModal()
-        localStorage.setItem('token', JSON.stringify(data.token))
+        localStorage.setItem('token', data.token)
         localStorage.setItem('user', JSON.stringify(data.user))
       } catch (e) {
         this.$message({

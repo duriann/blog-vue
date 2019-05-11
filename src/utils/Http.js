@@ -1,23 +1,26 @@
 // import axios from 'axios'
 import axios from 'axios'
-import moment from 'moment'
-
-axios.defaults.baseURL = process.env.NODE_ENV==='production' ? '' : 'http://127.0.0.1:9999/api'
+import router from '../router/index'
+axios.defaults.baseURL = process.env.NODE_ENV === 'production' ? '' : 'http://127.0.0.1:9999/api'
 
 let token = localStorage.getItem('token');
-if(token){
-  axios.defaults.headers.common['token'] = JSON.parse(token)
+if (token) {
+  axios.defaults.headers.common['token'] = token
 }
 
-axios.interceptors.request.use(config=> {
+axios.interceptors.request.use(config => {
   return config;
 }, error => {
   return Promise.reject(error);
 });
 
 axios.interceptors.response.use(res => {
-  let { data, code , msg} = res.data
-  
+  let {
+    data,
+    code,
+    msg
+  } = res.data
+
   //当token过期的时候 删掉localStorage中的user 和 token
   if (code === -1 || code === -2 || code === -3) {
     localStorage.removeItem('user')
@@ -26,7 +29,7 @@ axios.interceptors.response.use(res => {
       message: msg,
       type: 'error'
     })
-    location.href = '/home'
+    router.push('/home')
   }
   return res;
 }, err => {

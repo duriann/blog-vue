@@ -18,7 +18,14 @@ Vue.prototype.$http = http
 
 router.beforeEach((to, from, next) => {
   to.params.name = to.name
-  
+  if (to.meta.requireAuth) {
+    let token = localStorage.getItem('token')
+    if (!token) {
+      next({
+        path: '/home'
+      })
+    }
+  }
   next()
 })
 new Vue({

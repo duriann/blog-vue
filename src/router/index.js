@@ -1,42 +1,43 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-const Home = () => import(/* webpackChunkName: 'home' */ '../pages/Home/Home')
+const Home = () => import( /* webpackChunkName: 'home' */ '../pages/Home/Home')
 
-const FrontEnd = () => import(/* webpackChunkName: 'FrontEnd' */ '../pages/FrontEnd/FrontEnd')
-const FEVue = () => import(/* webpackChunkName: 'FEVue' */ '../pages/FrontEnd/Vue/FEVue')
-const React = () => import(/* webpackChunkName: 'React' */ '../pages/FrontEnd/React/React')
-
-
-const BackEnd = () => import(/* webpackChunkName: 'BackEnd' */ '../pages/BackEnd/BackEnd')
-const Java = () => import(/* webpackChunkName: 'Java' */ '../pages/BackEnd/Java/Java')
-const ThinkAbout = () => import(/* webpackChunkName: 'ThinkAbout' */ '../pages/ThinkAbout/ThinkAbout')
-
-const Index = () => import(/* webpackChunkName: 'Index' */ '../pages/Index/Index')
-const Archives = () => import(/* webpackChunkName: 'Archives' */ '../pages/Archives/Archives')
+const FrontEnd = () => import( /* webpackChunkName: 'FrontEnd' */ '../pages/FrontEnd/FrontEnd')
+const FEVue = () => import( /* webpackChunkName: 'FEVue' */ '../pages/FrontEnd/Vue/FEVue')
+const React = () => import( /* webpackChunkName: 'React' */ '../pages/FrontEnd/React/React')
 
 
-const Admin = () => import(/* webpackChunkName: 'Admin' */ '../pages/Admin/Admin')
-const User = () => import(/* webpackChunkName: 'User' */ '../pages/Admin/User/User')
-const ArticleAdd = () => import(/* webpackChunkName: 'ArticleAdd' */ '../pages/Admin/Article/ArticleAdd')
-const ArticleList = () => import(/* webpackChunkName: 'ArticleList' */ '../pages/Admin/Article/ArticleList')
-const CategoryList = () => import(/* webpackChunkName: 'Category' */ '../pages/Admin/Category/CategoryList')
+const BackEnd = () => import( /* webpackChunkName: 'BackEnd' */ '../pages/BackEnd/BackEnd')
+const Java = () => import( /* webpackChunkName: 'Java' */ '../pages/BackEnd/Java/Java')
+const ThinkAbout = () => import( /* webpackChunkName: 'ThinkAbout' */ '../pages/ThinkAbout/ThinkAbout')
+
+const Index = () => import( /* webpackChunkName: 'Index' */ '../pages/Index/Index')
+const Archives = () => import( /* webpackChunkName: 'Archives' */ '../pages/Archives/Archives')
 
 
-const Error = () => import(/* webpackChunkName: 'Error' */ '../pages/Error/Error')
+const Admin = () => import( /* webpackChunkName: 'Admin' */ '../pages/Admin/Admin')
+const User = () => import( /* webpackChunkName: 'User' */ '../pages/Admin/User/User')
+const ArticleAdd = () => import( /* webpackChunkName: 'ArticleAdd' */ '../pages/Admin/Article/ArticleAdd')
+const ArticleList = () => import( /* webpackChunkName: 'ArticleList' */ '../pages/Admin/Article/ArticleList')
+const CategoryList = () => import( /* webpackChunkName: 'Category' */ '../pages/Admin/Category/CategoryList')
+
+
+const Error = () => import( /* webpackChunkName: 'Error' */ '../pages/Error/Error')
 
 Vue.use(Router)
 
 export default new Router({
     mode: 'history',
-    routes: [
-        { path: '/', redirect: '/home' },
+    routes: [{
+            path: '/',
+            redirect: '/home'
+        },
         {
             path: '/index',
             name: 'index',
             component: Index,
-            children: [
-                {
+            children: [{
                     path: '/home',
                     name: 'home',
                     component: Home
@@ -88,8 +89,10 @@ export default new Router({
             path: '/admin',
             name: 'admin',
             component: Admin,
-            children: [
-                {
+            meta: {
+                requireAuth: true
+            },
+            children: [{
                     path: '/user/list',
                     name: 'userlist',
                     component: User
@@ -116,6 +119,6 @@ export default new Router({
             name: 'error',
             component: Error
         }
-        
+
     ]
 })
