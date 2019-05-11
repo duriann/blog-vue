@@ -3,13 +3,6 @@
     <h2 class="title">{{title}}</h2>
     <ul class="items">
       <li v-for="item in data" :key="item.id" :class="mark">
-        <!-- <router-link v-if="item.level === 0" :to="{path:item.url+`${item.url==='/home'?'':'/'+item.id}`}">
-          <span>{{item.name || item.title}}</span>
-        </router-link>
-        <router-link v-if="item.level === 1" :to="{path:item.url+`${item.url==='/home'?'':'/'+item.id}`}">
-          <span>{{item.name || item.title}}</span>
-        </router-link>-->
-
         <!-- 如果url是首页 不需要传id过去  v-if判断的是  如果有url 说明那个是分类。。。 没有就是文章-->
         <router-link
           v-if="item.url"
@@ -25,14 +18,15 @@
           :key="child.id"
         >{{child.name || item.title}}</router-link>
 
-        <span class="time">{{item.createTime}}</span>
         <!--当mark为article的时候 要显示时间-->
+        <span class="time" v-if="mark==='article'">{{timeFormat(item.createTime)}}</span>
       </li>
     </ul>
   </div>
 </template>
 <script>
 import { treeToList } from '@/utils/index'
+import moment from 'moment'
 export default {
   props: ['mark'],
   data() {
@@ -57,7 +51,9 @@ export default {
       if (code === 0) {
         this.data = data
       }
-      console.log('articles', res)
+    },
+    timeFormat(time) {
+      return moment(time).format('YYYY-MM-DD')
     }
   },
   mounted() {

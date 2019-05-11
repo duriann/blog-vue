@@ -1,18 +1,18 @@
 const path = require('path')
-const webpack = require('webpack')
 const base = require('./webpack.base.js')
 const merge = require('webpack-merge')
 const CleanWebpackPlugin = require('clean-webpack-plugin')//清空dist
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")//提取css
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;//分析代码块大小
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');//删除console.log 压缩代码
+
 let result =  merge(base,{
     mode: 'production',
-
     output: {
         path: path.join(__dirname,'../dist'),
         filename: 'js/[name].[contenthash].js'//只有内容改变名称才变
     },
+    
     optimization: {
         
         minimizer: [new UglifyJsPlugin({

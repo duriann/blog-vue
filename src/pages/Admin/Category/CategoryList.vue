@@ -77,16 +77,18 @@
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="addDialogVisible = false">取 消</el-button>
+        <el-button @click="hideAddForm">取 消</el-button>
         <el-button type="primary" @click="validate('addForm')">确 定</el-button>
       </div>
     </el-dialog>
   </div>
 </template>
 <script>
+import { treeToList } from '@/utils'
 export default {
   data() {
     return {
+      allCategorys: [], //所有分类 list结构
       tableData: [],
       keyword: '',
       currPage: 1,
@@ -128,6 +130,10 @@ export default {
     }
   },
   methods: {
+    hideAddForm() {
+      this.$refs['addForm'].resetFields()
+      this.addDialogVisible = false
+    },
     //当有选择父级分类的时候 导航需要设置为0(非导航) 并且不可修改
     parentHanderChange(e) {
       console.log('select parent value', e)
@@ -148,9 +154,10 @@ export default {
           parentId,
           parentUrl
         } = this.addForm
+        console.log('this.addForm', this.addForm, this.tableData)
         if (parentId) {
           //如果有父级id 需要传父级url 以及修改等级为1
-          this.addForm.parentUrl = this.tableData.filter(
+          this.addForm.parentUrl = this.allCategorys.filter(
             item => item.id === parentId
           )[0].url
           this.addForm.level = 1
@@ -179,22 +186,51 @@ export default {
       } else {
         this.$message.error(msg)
       }
-      this.$refs['addForm'].resetFields() //清空form
-      this.addDialogVisible = false
+      this.hideAddForm()
+      this.getCategorys(this.currPage)
     },
     //分页handle
     pageHandle(currPage) {
+      this.currPage = currPage
       this.getCategorys(currPage)
     },
     //编辑
     handleEdit(index, row) {
       console.log(index, row)
+      row.isNav += '' //为了让select框的value显示 否
+      this.$nextTick(() => {
+        this.addForm = Object.assign({}, row)
+      })
+      this.addDialogVisible = true
     },
     //删除
-    handleDelete(index, row) {
+    async handleDelete(index, row) {
       console.log(index, row)
+      try {
+        await this.$confirm('此操作将永久删除该分类, 是否继续?', '温馨提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        })
+        let res = await this.$http.post('/admin/category/delete', {
+          id: row.id
+        })
+        if (res.data.code === 0) {
+          this.getCategorys(this.currPage)
+          return this.$message({
+            type: 'success',
+            message: '删除成功!'
+          })
+        }
+        this.$message({
+          type: 'error',
+          message: '删除失败QAQ'
+        })
+      } catch (e) {
+        console.log(e)
+      }
     },
-    //获取所有分类
+    //分页获取所有分类
     async getCategorys(currPage = 1) {
       const res = await this.$http.get('/admin/category/listByPage', {
         params: {
@@ -206,19 +242,32 @@ export default {
       const { data, code } = res.data
       console.log(data, res)
       if (code === 0) {
-        this.currPage += 1
+        // this.currPage += 1
         this.totalCount = data.totalCount
         this.tableData = data.pages
       }
+    },
+    //不分页获取所有一级分类 为了添加分类的时候找父级分类的url
+    async getAllCategory() {
+      if (this.$store.state.category.length === 0) {
+        await this.$store.dispatch('getCategory')
+      }
+
+      console.log('this.$store.state.category', this.$store.state.category)
+      this.allCategorys = treeToList(this.$store.state.category)
     }
   },
+
   computed: {
     parentCategory() {
-      return this.tableData.filter(item => item.level === 0)
+      return this.allCategorys.filter(
+        item => item.level === 0 && item.isNav !== 1
+      )
     }
   },
   mounted() {
     this.getCategorys()
+    this.getAllCategory()
   }
 }
 </script>

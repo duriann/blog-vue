@@ -7,7 +7,8 @@ import ElementUI from 'element-ui'
 import 'highlight.js/styles/xcode.css'
 import './assets/reset.css'
 import './assets/fonts/iconfont.css'
-// import 'element-ui/lib/theme-chalk/index.css'; 使用cdn的时候不需要导入样式
+//使用cdn的时候不需要导入样式
+// import 'element-ui/lib/theme-chalk/index.css'; 
 import http from '@/utils/Http'
 import store from './vuex/store'
 

@@ -1,11 +1,13 @@
+const webpack = require('webpack')
+const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
-const webpack = require('webpack')
-const path = require('path')
+
 function resolve (dir) {
     return path.join(__dirname, '..', dir)
 }
+
 module.exports = {
     entry: ('./src/main.js'),
     // 表示在引入静态资源时，从根路径开始引入

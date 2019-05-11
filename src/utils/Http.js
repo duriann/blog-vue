@@ -16,24 +16,17 @@ axios.interceptors.request.use(config=> {
 });
 
 axios.interceptors.response.use(res => {
-  let { data, code } = res.data
+  let { data, code , msg} = res.data
   
-  if(Array.isArray(data)){
-    data.map(item=>{
-      item.createTime = item.createTime&&moment(item.createTime).format('YYYY-MM-DD HH:mm:ss')
-    })
-  }
-  if(data&&data.pages){
-    data.pages.map(item=>{
-      item.createTime = item.createTime&&moment(item.createTime).format('YYYY-MM-DD HH:mm:ss')
-      item.updateTime = item.updateTime&&moment(item.updateTime).format('YYYY-MM-DD HH:mm:ss')
-
-    })
-  }
   //当token过期的时候 删掉localStorage中的user 和 token
-  if(code === -2){
+  if (code === -1 || code === -2 || code === -3) {
     localStorage.removeItem('user')
     localStorage.removeItem('token')
+    ELEMENT.Message({
+      message: msg,
+      type: 'error'
+    })
+    location.href = '/home'
   }
   return res;
 }, err => {
