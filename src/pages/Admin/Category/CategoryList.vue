@@ -58,7 +58,12 @@
           <el-input v-model="addForm.url" autocomplete="off" placeholder="/admin"></el-input>
         </el-form-item>
         <el-form-item label="父级分类" prop="parentId">
-          <el-select v-model="addForm.parentId" placeholder="请选择父级分类" @change="parentHanderChange">
+          <el-select
+            v-model="addForm.parentId"
+            clearable
+            placeholder="请选择父级分类"
+            @change="parentHanderChange"
+          >
             <el-option v-for="pc in parentCategory" :key="pc.id" :label="pc.name" :value="pc.id"></el-option>
           </el-select>
         </el-form-item>
