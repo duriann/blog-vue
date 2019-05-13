@@ -42,8 +42,6 @@
         <el-button size="small">取消</el-button>
       </el-col>
     </el-row>
-
-    <code class="ql-editor" v-html="content"></code>
   </div>
 </template>
 

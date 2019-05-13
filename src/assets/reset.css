@@ -56,7 +56,6 @@ html,body{
 	-moz-user-select: none;
 }
 pre, code { 
-	overflow: auto; 
 	background: #f4f4f4; 
 	white-space:-moz-pre-wrap; /* Mozilla, since 1999 */    
 	white-space:-pre-wrap; /* Opera 4-6 */    
