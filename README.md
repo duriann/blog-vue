@@ -33,3 +33,6 @@
 ### 20190505
 - 改变路由模式为history  
 - 修复pre标签不换行导致的主页出现横向滚动条
+
+### 20190524
+- 生产环境时 需要修改ArticleAdd.vue中的图片上传url 即serverUrl: '/api/file/upload'  去掉前面的/api

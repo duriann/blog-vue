@@ -1,7 +1,7 @@
 // import axios from 'axios'
 import axios from 'axios'
 import router from '../router/index'
-axios.defaults.baseURL = process.env.NODE_ENV === 'production' ? '' : 'http://127.0.0.1:9999/api'
+axios.defaults.baseURL = process.env.NODE_ENV === 'production' ? '' : 'http://127.0.0.1:9998/api'
 
 let token = localStorage.getItem('token');
 if (token) {

@@ -6,7 +6,7 @@ module.exports = merge(base, {
     mode: 'development',
     devServer: {
         // contentBase: path.join(__dirname,'dist'),
-        port: 9999,
+        port: 9998,
         host: '127.0.0.1',
         hot: true,
         open: true,
