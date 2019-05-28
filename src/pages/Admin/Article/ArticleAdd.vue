@@ -81,7 +81,10 @@ export default {
     return {
       quillUpdateImg: false, // 根据图片上传状态来确定是否显示loading动画，刚开始是false,不显示
 
-      serverUrl: '/api/file/upload', // 这里写你要上传的图片服务器地址
+      serverUrl:
+        process.env.NODE_ENV === 'production'
+          ? '/file/upload'
+          : '/api/file/upload', // 这里写你要上传的图片服务器地址
       content: '', //文章内容
       title: '', //文章标题
       categories: [], //文章分类

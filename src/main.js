@@ -21,6 +21,10 @@ router.beforeEach((to, from, next) => {
   if (to.meta.requireAuth) {
     let token = localStorage.getItem('token')
     if (!token) {
+      ELEMENT.Message({
+        message: 'token验证失败QAQ',
+        type: 'error'
+      })
       next({
         path: '/home'
       })
