@@ -102,6 +102,8 @@ export default {
 </script>
 <style lang="less" scoped>
 .archive {
+  display: flex;
+  flex-direction: column;
   background-color: #fff;
   height: auto;
   padding: 15px;
@@ -137,7 +139,7 @@ export default {
   border-bottom: 1px solid #eee;
   margin-bottom: 20px;
   & /deep/ img {
-    cursor: pointer;
+    cursor: pointer !important;
   }
 }
 </style>

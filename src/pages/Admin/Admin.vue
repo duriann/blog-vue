@@ -5,7 +5,7 @@
         <el-col :span="3" class="logo">
           <img src="@/assets/logo.png" alt="bolo">
         </el-col>
-        <el-col :span="16" class="title">博客后台管理系统</el-col>
+        <el-col :span="14" class="title">博客后台管理系统</el-col>
         <el-col :span="4">
           <span>欢迎xx</span>
           <span class="logout" @click.prevent="logout" href="#">退出</span>

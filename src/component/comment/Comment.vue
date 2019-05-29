@@ -120,6 +120,7 @@ export default {
       if (item.isLike === null) {
         Vue.$set(item, 'isLike', true)
         item.likeNum++
+        console.log(123)
       } else {
         if (item.isLike) {
           item.likeNum--
@@ -137,6 +138,7 @@ export default {
       this.inputComment = ''
       this.showItemId = ''
       this.showAdd = false
+      this.replyName = ''
     },
 
     /**
@@ -182,6 +184,7 @@ export default {
         this.replyName = '@' + reply.username + ' '
         this.showItemName = reply.username
       } else {
+        this.replyName = ''
         this.inputComment = ''
         this.showItemName = item.username
       }
