@@ -6,12 +6,26 @@
         <el-input v-model="title" placeholder="请输入文章标题"></el-input>
       </el-col>
     </el-row>
-
+    <el-row>
+      <el-col>
+        <el-tag type="success">请选择一张主图(展示在首页文章摘要中的图片)</el-tag>
+        <el-upload
+          class="avatar-uploader"
+          :action="serverUrl"
+          :show-file-list="false"
+          :on-success="handleAvatarSuccess"
+          :before-upload="beforeAvatarUpload"
+        >
+          <img v-if="headImg" :src="headImg" class="avatar">
+          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+        </el-upload>
+      </el-col>
+    </el-row>
     <el-row v-loading="quillUpdateImg">
       <el-col>
         <!-- 图片上传组件辅助-->
         <el-upload
-          class="avatar-uploader"
+          class="avatar-uploader2"
           :action="serverUrl"
           name="file"
           :show-file-list="false"
@@ -42,8 +56,6 @@
         <el-button size="small">取消</el-button>
       </el-col>
     </el-row>
-
-    <code class="ql-editor" v-html="content"></code>
   </div>
 </template>
 
@@ -81,9 +93,13 @@ const toolbarOps = [
 export default {
   data() {
     return {
+      headImg: '', //这个url是上传首页文章主图的图片url
       quillUpdateImg: false, // 根据图片上传状态来确定是否显示loading动画，刚开始是false,不显示
 
-      serverUrl: '/api/file/upload', // 这里写你要上传的图片服务器地址
+      serverUrl:
+        process.env.NODE_ENV === 'production'
+          ? '/file/upload'
+          : '/api/file/upload', // 这里写你要上传的图片服务器地址
       content: '', //文章内容
       title: '', //文章标题
       categories: [], //文章分类
@@ -102,7 +118,7 @@ export default {
               image: function(value) {
                 if (value) {
                   // 触发input框选择图片文件
-                  document.querySelector('.avatar-uploader input').click()
+                  document.querySelector('.avatar-uploader2 input').click()
                 } else {
                   this.quill.format('image', false)
                 }
@@ -132,6 +148,20 @@ export default {
   },
 
   methods: {
+    handleAvatarSuccess(res, file) {
+      console.log('res', res)
+      if (res.code === 0) {
+        this.headImg = 'http://localhost:7777/' + res.data
+      }
+      // this.imageUrl = URL.createObjectURL(file.raw)
+    },
+    beforeAvatarUpload(file) {
+      const isLt10M = file.size / 1024 / 1024 < 10
+      if (!isLt10M) {
+        this.$message.error('上传主图图片大小不能超过 10MB!')
+      }
+      return isLt10M
+    },
     onEditorChange(e) {
       this.content = e.html
       console.log('this,content', this.content)
@@ -201,7 +231,8 @@ export default {
         categoryId: this.selectedCategory.slice(
           this.selectedCategory.length - 1,
           this.selectedCategory.length
-        )[0]
+        )[0],
+        headImg: this.headImg
       })
       if (res.data.code === 0) {
         console.log(this)
@@ -232,5 +263,28 @@ export default {
   & /deep/ .ql-editor {
     min-height: 400px; //修复设置了min-height后 编辑器空白区域不可点击
   }
+}
+.avatar-uploader /deep/ .el-upload {
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.avatar-uploader /deep/ .el-upload:hover {
+  border-color: #409eff;
+}
+.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 120px;
+  height: 120px;
+  line-height: 120px;
+  text-align: center;
+}
+.avatar {
+  width: 120px;
+  height: 120px;
+  display: block;
 }
 </style>

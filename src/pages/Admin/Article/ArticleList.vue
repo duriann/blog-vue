@@ -51,19 +51,46 @@ export default {
       tableData: [],
       keyword: '',
       currPage: 1,
-      pageSize: 2,
-      totalCount: 0
+      pageSize: 5,
+      totalCount: 0,
+      totalPage: 0
     }
   },
   methods: {
     pageHandle(currPage) {
+      this.currPage = currPage
       this.getArticles(currPage)
     },
     handleEdit(index, row) {
       console.log(index, row)
     },
-    handleDelete(index, row) {
+    async handleDelete(index, row) {
       console.log(index, row)
+      console.log(
+        'this.totalCount',
+        this.totalCount,
+        'this.totalPage',
+        this.totalPage
+      )
+      const res = await this.$http.post('/admin/article/delete', {
+        id: row.id
+      })
+      console.log('delete res', res)
+      let { code, msg } = res.data
+      let type = 'error'
+      if (code === 0) {
+        type = 'success'
+        if (this.currPage === this.totalPage) {
+          if (this.totalCount % this.pageSize === 1) {
+            this.currPage -= 1
+          }
+        }
+      }
+      this.$message({
+        type,
+        message: msg
+      })
+      this.getArticles(this.currPage < 1 ? 1 : this.currPage)
     },
     async getArticles(currPage = 1) {
       const res = await this.$http.get('/article/listByPage', {
@@ -74,11 +101,9 @@ export default {
         }
       })
       const { data, code } = res.data
-      console.log(data, res)
       if (code === 0) {
-        this.currPage += 1
         this.totalCount = data.totalCount
-        this.tableData = data.pages
+        ;(this.tableData = data.pages), (this.totalPage = data.totalPage)
       }
     }
   },
