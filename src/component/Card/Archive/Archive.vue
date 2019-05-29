@@ -24,27 +24,37 @@
       </div>
     </div>
     <div class="content">
-      <div v-html="article.content"></div>
+      <div v-html="article.content" @click="test($event)"></div>
     </div>
     <Comment id="comment" :comments="comments" :articleId="article.id" @getArticle="getArticle"></Comment>
+    <ImageViewer :img="img" ref="iv"></ImageViewer>
   </div>
 </template>
 <script>
 import Comment from '../../Comment/Comment'
 import moment from 'moment'
+import ImageViewer from '../../ImageViewer/ImageViewer'
 
 export default {
   components: {
-    Comment
+    Comment,
+    ImageViewer
   },
   data() {
     return {
       article: {},
       comments: [],
-      category: {}
+      category: {},
+      img: ''
     }
   },
   methods: {
+    test(e) {
+      if (e.target.nodeName === 'IMG') {
+        this.img = e.target
+        this.$refs.iv.toggleShow()
+      }
+    },
     //获取文章
     async getArticle() {
       const res = await this.$http.get('/article/get', {
@@ -84,6 +94,9 @@ export default {
   },
   created() {
     this.getArticle()
+  },
+  mounted() {
+    let imgs = document.querySelectorAll('img')
   }
 }
 </script>
@@ -123,5 +136,8 @@ export default {
   font-size: 16px;
   border-bottom: 1px solid #eee;
   margin-bottom: 20px;
+  & /deep/ img {
+    cursor: pointer;
+  }
 }
 </style>
