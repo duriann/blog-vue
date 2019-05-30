@@ -1,6 +1,7 @@
 <template>
   <div class="viewer" v-show="isShow" @click="toggleShow">
     <img :src="img.src" ref="imgref">
+    <a :href="img.src">查看原图</a>
   </div>
 </template>
 <script>
@@ -13,6 +14,7 @@ export default {
   },
   methods: {
     toggleShow() {
+      console.dir(this.img)
       this.isShow = !this.isShow
     }
   },
@@ -49,12 +51,20 @@ export default {
   background-color: rgba(0, 0, 0, 0.6);
   z-index: 999;
   img {
+    cursor: zoom-out;
     width: 100%;
     height: 100%;
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+  }
+  a {
+    color: rgb(196, 97, 158);
+    font-size: 20px;
+    position: absolute;
+    right: 10%;
+    top: 5%;
   }
 }
 </style>

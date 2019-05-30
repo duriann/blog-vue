@@ -73,7 +73,7 @@ import ImageResize from 'quill-image-resize-module'
 
 Quill.register('modules/imageResize', ImageResize)
 Quill.register('modules/imageDrop', ImageDrop)
-
+import url from '../../../../config/index'
 const toolbarOps = [
   ['bold', 'italic', 'underline', 'strike'],
   ['blockquote', 'code-block'],
@@ -151,7 +151,7 @@ export default {
     handleAvatarSuccess(res, file) {
       console.log('res', res)
       if (res.code === 0) {
-        this.headImg = 'http://localhost:7777/' + res.data
+        this.headImg = url[process.env.NODE_ENV].apiUrl + res.data
       }
       // this.imageUrl = URL.createObjectURL(file.raw)
     },
@@ -184,7 +184,11 @@ export default {
         let length = quill.getSelection().index
         // 插入图片  res.info为服务器返回的图片地址
         console.log('res.data', res.data)
-        quill.insertEmbed(length, 'image', 'http://localhost:7777/' + res.data)
+        quill.insertEmbed(
+          length,
+          'image',
+          url[process.env.NODE_ENV].apiUrl + res.data
+        )
         // 调整光标到最后
         quill.setSelection(length + 1)
       } else {
