@@ -139,7 +139,9 @@ export default {
   border-bottom: 1px solid #eee;
   margin-bottom: 20px;
   & /deep/ img {
-    cursor: pointer !important;
+    width: 100%;
+    height: 100%;
+    cursor: zoom-in !important;
   }
 }
 </style>

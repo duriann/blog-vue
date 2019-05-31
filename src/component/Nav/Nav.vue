@@ -24,7 +24,20 @@
           <i class="iconfont icon-fenlei"></i>
         </li>
       </ul>
-      <div class="search">
+
+      <div class="search" @click="searchHandle">
+        <i v-show="showSearch" class="inputicon iconfont icon-search-1-copy"></i>
+
+        <transition name="fade">
+          <input
+            v-model="searchKey"
+            @keyup.enter="search"
+            ref="searchInput"
+            @click.stop
+            v-show="showSearch"
+            type="text"
+          >
+        </transition>
         <i class="iconfont icon-search-1-copy"></i>
       </div>
     </div>
@@ -35,10 +48,38 @@ import { treeToList } from '@/utils/'
 export default {
   data() {
     return {
-      menus: []
+      menus: [],
+      showSearch: false,
+      searchKey: ''
     }
   },
   methods: {
+    // 搜索文章
+    search() {
+      console.log('this.searchKey', this.searchKey)
+      if (!this.searchKey) {
+        this.showSearch = false
+        return this.$message({
+          type: 'error',
+          message: '搜索条件不能为空!',
+          duration: 500
+        })
+      }
+      this.$router.push({
+        name: 'search',
+        params: { keyword: this.searchKey }
+      })
+      this.searchKey = ''
+    },
+    searchHandle() {
+      console.log('search hanlder')
+      this.showSearch = !this.showSearch
+      if (this.showSearch) {
+        this.$nextTick(() => {
+          this.$refs.searchInput.focus()
+        })
+      }
+    },
     toggleMenu() {
       //在小屏的时候 点击添加类 实现menu显示和影藏
       this.$refs.ulmenu.classList.toggle('responsive')
@@ -84,6 +125,7 @@ export default {
     '$route.path'(newVal, oldVal) {
       // console.log('Nav watch', newVal)
       this.active(newVal)
+      this.showSearch = false
     }
   },
   mounted() {
@@ -107,6 +149,7 @@ export default {
     opacity: 0.9;
   }
   .search {
+    position: relative;
     cursor: pointer;
     text-align: center;
     line-height: 52px;
@@ -116,6 +159,26 @@ export default {
     height: 52px;
     background-color: #16a085;
     color: #fff;
+    input {
+      padding-left: 30px;
+      position: absolute;
+      right: 0;
+      top: 52px;
+      font-size: 16px;
+      outline: none;
+      height: 34px;
+      // border: 1px solid rgb(22, 160, 133);
+      z-index: 9999;
+    }
+    .inputicon {
+      position: absolute;
+      z-index: 9999;
+      top: 46px;
+      color: #ccc;
+      left: -144px;
+      font-size: 18px;
+      z-index: 10000;
+    }
     i {
       font-size: 20px;
     }
@@ -168,6 +231,13 @@ export default {
     line-height: 52px;
     text-align: center;
     color: #fff;
+  }
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: opacity 0.5s;
+  }
+  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
   }
 }
 </style>

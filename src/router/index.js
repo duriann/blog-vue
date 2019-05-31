@@ -22,6 +22,8 @@ const ArticleAdd = () => import( /* webpackChunkName: 'ArticleAdd' */ '../pages/
 const ArticleList = () => import( /* webpackChunkName: 'ArticleList' */ '../pages/Admin/Article/ArticleList')
 const CategoryList = () => import( /* webpackChunkName: 'Category' */ '../pages/Admin/Category/CategoryList')
 
+const Search = () => import( /* webpackChunkName: 'Search' */ '../pages/Search/Search')
+
 
 const Error = () => import( /* webpackChunkName: 'Error' */ '../pages/Error/Error')
 
@@ -82,6 +84,12 @@ export default new Router({
                     path: '/archives/:id',
                     name: 'archives',
                     component: Archives
+                },
+                {
+                    path: '/search/:keyword',
+                    name: 'search',
+                    component: Search,
+                    props: true
                 }
             ]
         },

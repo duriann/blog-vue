@@ -1,6 +1,7 @@
 const path = require('path')
 const base = require('./webpack.base.js')
 const merge = require('webpack-merge')
+const url = require('../config/index')
 
 module.exports = merge(base, {
     mode: 'development',
@@ -12,7 +13,7 @@ module.exports = merge(base, {
         open: true,
         proxy: {
             '/api': {
-                target: 'http://localhost:7777',
+                target: url[process.env.NODE_ENV].apiUrl,
                 pathRewrite: {
                     '^/api': ''
                 },
