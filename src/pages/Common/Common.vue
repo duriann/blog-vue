@@ -1,7 +1,7 @@
 <template>
   <div class="common">
     <div class="main">
-      <component :is="category" :cname="cname"></component>
+      <component :is="category" :cname="cname" :keyword="data.length===0 ?null:keyword"></component>
       <Card type="Article" v-for="item in data" :key="item.id" :detail="item"></Card>
     </div>
     <Pagination
@@ -40,6 +40,9 @@ export default {
       // 是否是顶级菜单节点 与id一起传的
       type: Boolean,
       required: false
+    },
+    keyword: {
+      required: false
     }
   },
   data() {
@@ -49,7 +52,6 @@ export default {
       currPage: 1,
       pageSize: 6,
       totalCount: 0,
-      keyword: '',
       data: []
     }
   },
@@ -57,10 +59,10 @@ export default {
     pageHandle(currPage) {
       this.getArticles(currPage)
     },
-    async getArticles(currPage = 1) {
+    async getArticles(currPage = 1, keyword = this.keyword) {
       const res = await this.$http.get('/article/listByPage', {
         params: {
-          keyword: this.keyword,
+          keyword,
           currPage,
           pageSize: this.pageSize,
           parentId: this.isParent ? this.id : null,
@@ -89,7 +91,6 @@ export default {
         // console.error('no type')
       })
     await this.getArticles()
-    console.log('totalCount', this.totalCount)
   },
   watch() {},
   components: {
