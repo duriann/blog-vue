@@ -57,12 +57,22 @@ export default {
     // 搜索文章
     search() {
       console.log('this.searchKey', this.searchKey)
+      if (!this.searchKey) {
+        this.showSearch = false
+        return this.$message({
+          type: 'error',
+          message: '搜索条件不能为空!',
+          duration: 500
+        })
+      }
       this.$router.push({
         name: 'search',
         params: { keyword: this.searchKey }
       })
+      this.searchKey = ''
     },
     searchHandle() {
+      console.log('search hanlder')
       this.showSearch = !this.showSearch
       if (this.showSearch) {
         this.$nextTick(() => {

@@ -107,9 +107,7 @@ button{
 	.index .content .tip{
 		display: none;
 	}
-	.index .nav .search{
-		display: none;
-	}
+	
 }
 @media screen and (max-width: 635px) {
 	.index .header {
@@ -126,6 +124,19 @@ button{
 	}
 }
 @media screen and (max-width: 500px) {
+	.title .meta span{
+		margin-right: 6px !important;
+	}
+	.pagination li span{
+		padding: 4px 6px 3px !important;
+	}
+	.index .nav .search{
+		position: absolute !important;
+    right: 50px;
+    top: 0;
+		z-index: 999;
+		background-color: transparent !important;
+	}
 	.index .header {
 		display: none !important;
 	}
