@@ -110,6 +110,10 @@ button{
 	
 }
 @media screen and (max-width: 635px) {
+	.article .content .headimg{
+		height: 100px !important;
+    width: 120px !important;
+	}
 	.index .header {
 		height: 54px !important;
 	}
@@ -189,6 +193,9 @@ button{
 	.index .header .ins{
 		display: none;
 	}
+	.index .article{
+		padding: 10px !important;
+	}
 	.index .article .content .headimg{
 		/* 
 		想了想 都这么小的屏幕了还是不显示图片了。。
@@ -200,7 +207,7 @@ button{
 		display: none !important;
 	}
 	.index .article .content .summary .summary-ins{
-		height: 100px !important;
-		-webkit-line-clamp: 5 !important;
+		height: auto !important;
+		-webkit-line-clamp: 3 !important;
 	}
 }
