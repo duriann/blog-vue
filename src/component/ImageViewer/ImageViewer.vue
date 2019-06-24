@@ -60,11 +60,18 @@ export default {
     transform: translate(-50%, -50%);
   }
   a {
-    color: rgb(196, 97, 158);
-    font-size: 20px;
-    position: absolute;
-    right: 10%;
-    top: 5%;
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    -webkit-transform: translate3d(-50%, 0, 0);
+    transform: translate3d(-50%, 0, 0);
+    padding: 8px 20px;
+    border-radius: 20px;
+    border: 1px solid #fff;
+    background-color: rgba(0, 0, 0, 0.4);
+    font-size: 15px;
+    color: #fff;
+    z-index: 10000001;
   }
 }
 </style>

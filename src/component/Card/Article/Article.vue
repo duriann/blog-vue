@@ -18,7 +18,7 @@
       >
       <img class="headimg" v-else :src="detail.headImg" alt>
       <div class="summary">
-        <span class="summary-ins" v-html="detail.content.replace(/(<img.*?)>/g ,'')"></span>
+        <span class="summary-ins" v-html="detail.content.substr(0,250).replace(/(<img.*?)>/g ,'')"></span>
         <p class="ins">
           <span>
             <i class="iconfont icon-iconfontgerenzhongxin"></i>

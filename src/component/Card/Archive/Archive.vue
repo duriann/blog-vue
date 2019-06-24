@@ -134,7 +134,6 @@ export default {
 }
 .content {
   padding: 12px 0 12px 0;
-  color: #333333;
   font-size: 16px;
   border-bottom: 1px solid #eee;
   margin-bottom: 20px;

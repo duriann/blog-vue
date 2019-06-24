@@ -7,6 +7,7 @@
 <script>
 import Card from '@/component/Card/Card'
 export default {
+  name: 'archives',
   data() {
     return {
       category: null
