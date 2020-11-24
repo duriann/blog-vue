@@ -52,7 +52,7 @@
   "dependencies": {
     "axios": "^0.19.0",
     "element-ui": "^2.8.2",
-    "highlight.js": "^9.15.6",
+    "highlight.js": "^10.1.2",
     "jsencrypt": "^3.0.0-rc.1",
     "quill-image-drop-module": "^1.0.3",
     "quill-image-resize-module": "^3.0.0",
